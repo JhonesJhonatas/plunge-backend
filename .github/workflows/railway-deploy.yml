@@ -1,0 +1,36 @@
+name: Railway Deploy on Merge to Main
+
+on:
+  workflow_run:
+    workflows: [Run Tests with Code Coverage on Merge to Main]
+    branches: [main]
+    jobs: [test]
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Run Tests
+        run: yarn test
+
+  deploy:
+    needs: [test]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Railway Deploy
+        run: |
+          railway login --token=${{ secrets.RAILWAY_API_KEY }}
+          railway deploy
