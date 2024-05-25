@@ -5,7 +5,7 @@ CREATE TABLE "User" (
     "userName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "birthDate" TEXT NOT NULL,
+    "birthDate" TIMESTAMP(3) NOT NULL,
     "avatarUrl" TEXT,
     "coverUrl" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,

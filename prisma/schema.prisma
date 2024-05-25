@@ -13,7 +13,7 @@ model User {
   userName  String   @unique
   email     String   @unique
   password  String
-  birthDate String
+  birthDate DateTime
   avatarUrl String?
   coverUrl  String?
   createdAt DateTime @default(now())

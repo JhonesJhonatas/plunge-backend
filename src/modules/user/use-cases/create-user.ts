@@ -1,6 +1,8 @@
 import { inject, injectable } from 'tsyringe'
 import { hash } from 'bcrypt'
 
+import { AppError } from '@/errors/app-error'
+
 import { IUserRepository } from '@user/repository/i-user-repository'
 import { ICreateUserDTO } from '@user/dto/i-create-user-dto'
 
@@ -17,9 +19,9 @@ export class CreateUserUseCase {
       this.userRepository.findByUserName(user.userName),
     ])
 
-    if (userAlreadyRegistered) throw new Error('User already registered')
+    if (userAlreadyRegistered) throw new AppError('User already registered')
 
-    if (userNameAlreadyTaken) throw new Error('Username already taken')
+    if (userNameAlreadyTaken) throw new AppError('Username already taken')
 
     const passwordHash = await hash(user.password, 8)
 

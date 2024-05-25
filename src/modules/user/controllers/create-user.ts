@@ -5,11 +5,11 @@ import { CreateUserUseCase } from '@user/use-cases/create-user'
 
 export class CreateUserController {
   async handle(request: Request, response: Response) {
-    const requestBody = request.body
+    const { body } = request
 
     const createUserUseCase = container.resolve(CreateUserUseCase)
 
-    const user = await createUserUseCase.execute(requestBody)
+    const user = await createUserUseCase.execute(body)
 
     return response.status(201).json(user)
   }

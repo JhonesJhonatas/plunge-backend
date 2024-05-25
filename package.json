@@ -19,7 +19,8 @@
     "prisma": "^5.14.0",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
-    "tsyringe": "^4.8.0"
+    "tsyringe": "^4.8.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.2.2",
