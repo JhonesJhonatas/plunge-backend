@@ -1,5 +1,0 @@
-{
-  "sourcemap": true,
-  "outDir": "dist",
-  "tsconfig": "tsconfig.json"
-}
