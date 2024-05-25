@@ -1,7 +1,7 @@
 import { User } from "@prisma/client";
 
-import { ICreateUserDTO } from "../dto/i-create-user-dto";
-import { IEditUserDTO } from "../dto/i-edit-user-dto";
+import { ICreateUserDTO } from "@user/dto/i-create-user-dto";
+import { IEditUserDTO } from "@user/dto/i-edit-user-dto";
 
 export interface IUserRepository {
   create(user:ICreateUserDTO):Promise<User>
