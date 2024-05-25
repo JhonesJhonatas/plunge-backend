@@ -3,7 +3,7 @@ export interface ICreateUserDTO {
   userName: string
   email: string
   password: string
-  birthDate: string
+  birthDate: Date
   avatarUrl?: string
   coverUrl?: string
 }

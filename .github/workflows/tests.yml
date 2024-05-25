@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Run Tests
-        run: echo Hello, World!
+        run: yarn test
