@@ -26,19 +26,47 @@ export class InMemoryUserRepository implements IUserRepository {
   }
 
   edit(user: IEditUserDTO): Promise<User> {
-    throw new Error('Method not implemented.')
+    const index = this.users.findIndex((u) => u.id === user.id)
+
+    if (index === -1) {
+      throw new Error('User not found')
+    }
+
+    const userToEdit = {
+      ...this.users[index],
+      ...user,
+      updatedAt: new Date(),
+    }
+
+    this.users[index] = userToEdit
+
+    const editedUser = this.users.find((u) => u.id === user.id)
+
+    return Promise.resolve(editedUser as User)
   }
 
   delete(id: string): Promise<User> {
-    throw new Error('Method not implemented.')
+    const index = this.users.findIndex((u) => u.id === id)
+
+    if (index === -1) {
+      throw new Error('User not found')
+    }
+
+    const userToDelete = this.users[index]
+
+    this.users.splice(index, 1)
+
+    return Promise.resolve(userToDelete)
   }
 
   findAll(): Promise<User[]> {
-    throw new Error('Method not implemented.')
+    return Promise.resolve(this.users)
   }
 
   findById(id: string): Promise<User | null> {
-    throw new Error('Method not implemented.')
+    const user = this.users.find((u) => u.id === id)
+
+    return Promise.resolve(user || null)
   }
 
   findByEmail(email: string): Promise<User | null> {

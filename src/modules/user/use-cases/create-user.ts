@@ -19,9 +19,10 @@ export class CreateUserUseCase {
       this.userRepository.findByUserName(user.userName),
     ])
 
-    if (userAlreadyRegistered) throw new AppError('User already registered')
+    if (userAlreadyRegistered)
+      throw new AppError('User already registered', 400)
 
-    if (userNameAlreadyTaken) throw new AppError('Username already taken')
+    if (userNameAlreadyTaken) throw new AppError('Username already taken', 400)
 
     const passwordHash = await hash(user.password, 8)
 

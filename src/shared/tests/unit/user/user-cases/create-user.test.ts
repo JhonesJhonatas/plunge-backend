@@ -1,5 +1,6 @@
 import { CreateUserUseCase } from '@user/use-cases/create-user'
 import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
+import { AppError } from '@/errors/app-error'
 
 const userRepository = new InMemoryUserRepository()
 const createUserUseCase = new CreateUserUseCase(userRepository)
@@ -28,13 +29,35 @@ describe('create-user-use-case', () => {
     expect(createdUser.coverUrl).toBe(userToCreate.coverUrl)
   })
 
-  // it('should not be able to create a topic with the same title', async () => {
-  //   const topicToCreate = {
-  //     title: 'Tecnologia',
-  //   }
+  it('should not be able to create a user with an already registered email', async () => {
+    const userToCreate = {
+      name: 'Jhones Jhonatas',
+      userName: 'jhonesjhonatas',
+      email: 'jhones.jhonatas@example.com',
+      password: 'senha123',
+      birthDate: new Date('1995-12-24'),
+      avatarUrl: 'https://example.com/avatar.jpg',
+      coverUrl: 'https://example.com/cover.jpg',
+    }
 
-  //   await expect(createTopicUseCase.execute(topicToCreate)).rejects.toEqual(
-  //     new AppError('Topic already exists', 400),
-  //   )
-  // })
+    await expect(createUserUseCase.execute(userToCreate)).rejects.toEqual(
+      new AppError('User already registered', 400),
+    )
+  })
+
+  it('should not be able to create a user with an already taken username', async () => {
+    const userToCreate = {
+      name: 'Jhones Jhonatas',
+      userName: 'jhonesjhonatas',
+      email: 'jhones.test@example.com',
+      password: 'senha123',
+      birthDate: new Date('1995-12-24'),
+      avatarUrl: 'https://example.com/avatar.jpg',
+      coverUrl: 'https://example.com/cover.jpg',
+    }
+
+    await expect(createUserUseCase.execute(userToCreate)).rejects.toEqual(
+      new AppError('Username already taken', 400),
+    )
+  })
 })
