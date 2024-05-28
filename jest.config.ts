@@ -13,5 +13,6 @@ export default {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
     '^@user/(.*)$': '<rootDir>/src/modules/user/$1',
+    '^@topic/(.*)$': '<rootDir>/src/modules/topic/$1',
   },
 }

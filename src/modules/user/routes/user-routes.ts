@@ -23,8 +23,4 @@ userRoutes.put('/edit', editUserParse.execute, editUserController.handle)
 
 userRoutes.get('/find-all', findAllUsersController.handle)
 
-userRoutes.delete(
-  '/delete/:id',
-  editUserParse.execute,
-  deleteUserController.handle,
-)
+userRoutes.delete('/delete/:id', deleteUserController.handle)
