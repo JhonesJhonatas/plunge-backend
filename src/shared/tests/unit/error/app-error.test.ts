@@ -17,6 +17,6 @@ describe('app-error', () => {
     const error = new AppError(message)
 
     expect(error.message).toBe(message)
-    expect(error.statusCode).toBe(500)
+    expect(error.statusCode).toBe(400)
   })
 })
