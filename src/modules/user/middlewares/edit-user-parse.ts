@@ -2,27 +2,34 @@ import { NextFunction, Request, Response } from 'express'
 import { ZodError, z } from 'zod'
 
 const validationSchema = z.object({
-  name: z.string().min(6, { message: 'Name must have at least 6 characters' }),
+  id: z.string().uuid(),
+  name: z
+    .string()
+    .min(6, { message: 'Name must have at least 6 characters' })
+    .optional(),
   userName: z
     .string()
-    .min(6, { message: 'Username must have at least 6 characters' }),
-  email: z.string().email({ message: 'Invalid email' }),
+    .min(6, { message: 'Username must have at least 6 characters' })
+    .optional(),
+  email: z.string().email({ message: 'Invalid email' }).optional(),
   password: z
     .string()
-    .min(8, { message: 'Password must have at least 8 characters' }),
+    .min(8, { message: 'Password must have at least 8 characters' })
+    .optional(),
   birthDate: z
     .string()
     .regex(/^\d{4}-\d{2}-\d{2}$/)
     .transform((value) => {
       return new Date(value)
-    }),
-  avatarUrl: z.string().url({ message: 'Invalid URL' }).nullable(),
-  coverUrl: z.string().url({ message: 'Invalid URL' }).nullable(),
+    })
+    .optional(),
+  avatarUrl: z.string().url({ message: 'Invalid URL' }).nullable().optional(),
+  coverUrl: z.string().url({ message: 'Invalid URL' }).nullable().optional(),
 })
 
 export type UserSchema = z.infer<typeof validationSchema>
 
-class CreateUserParse {
+class EditUserParse {
   execute(request: Request, response: Response, next: NextFunction) {
     try {
       const data = validationSchema.parse(request.body)
@@ -45,4 +52,4 @@ class CreateUserParse {
   }
 }
 
-export const createUserParse = new CreateUserParse()
+export const editUserParse = new EditUserParse()

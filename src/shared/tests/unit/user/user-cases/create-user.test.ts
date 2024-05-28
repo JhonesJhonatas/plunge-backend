@@ -8,9 +8,9 @@ const createUserUseCase = new CreateUserUseCase(userRepository)
 describe('create-user-use-case', () => {
   it('should be able to create a user', async () => {
     const userToCreate = {
-      name: 'Jhones Jhonatas',
-      userName: 'jhonesjhonatas',
-      email: 'jhones.jhonatas@example.com',
+      name: 'Tester',
+      userName: 'tester123',
+      email: 'tester@example.com',
       password: 'senha123',
       birthDate: new Date('1995-12-24'),
       avatarUrl: 'https://example.com/avatar.jpg',

@@ -6,7 +6,20 @@ import { ICreateUserDTO } from '../../dto/i-create-user-dto'
 import { IEditUserDTO } from '../../dto/i-edit-user-dto'
 
 export class InMemoryUserRepository implements IUserRepository {
-  private users: User[] = []
+  private users: User[] = [
+    {
+      id: 'd51feab3-b0df-468f-928a-b06e11776bed',
+      name: 'Jhones Jhonatas',
+      userName: 'jhonesjhonatas',
+      email: 'jhones.jhonatas@example.com',
+      password: 'senha123',
+      birthDate: new Date('1995-12-24T00:00:00.000Z'),
+      avatarUrl: 'https://example.com/avatar.jpg',
+      coverUrl: 'https://example.com/cover.jpg',
+      createdAt: new Date('2024-05-25T06:33:34.631Z'),
+      updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+    },
+  ]
 
   create(user: ICreateUserDTO): Promise<User> {
     const userToCreate = {
