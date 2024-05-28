@@ -19,6 +19,18 @@ export class InMemoryUserRepository implements IUserRepository {
       createdAt: new Date('2024-05-25T06:33:34.631Z'),
       updatedAt: new Date('2024-05-28T00:36:23.388Z'),
     },
+    {
+      id: 'd51feab3-b0df-468f-928a-b06e11776bes',
+      name: 'Blitz Wolf',
+      userName: 'blitzwolf',
+      email: 'blitzwolf@example.com',
+      password: 'senha123',
+      birthDate: new Date('1995-12-24T00:00:00.000Z'),
+      avatarUrl: 'https://example.com/avatar.jpg',
+      coverUrl: 'https://example.com/cover.jpg',
+      createdAt: new Date('2024-05-25T06:33:34.631Z'),
+      updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+    },
   ]
 
   create(user: ICreateUserDTO): Promise<User> {
@@ -41,10 +53,6 @@ export class InMemoryUserRepository implements IUserRepository {
   edit(user: IEditUserDTO): Promise<User> {
     const index = this.users.findIndex((u) => u.id === user.id)
 
-    if (index === -1) {
-      throw new Error('User not found')
-    }
-
     const userToEdit = {
       ...this.users[index],
       ...user,
@@ -60,10 +68,6 @@ export class InMemoryUserRepository implements IUserRepository {
 
   delete(id: string): Promise<User> {
     const index = this.users.findIndex((u) => u.id === id)
-
-    if (index === -1) {
-      throw new Error('User not found')
-    }
 
     const userToDelete = this.users[index]
 

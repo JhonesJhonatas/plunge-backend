@@ -13,6 +13,10 @@ export class EditUserUseCase {
   ) {}
 
   async execute(props: IEditUserDTO) {
+    const userExists = await this.userRepository.findById(props.id)
+
+    if (!userExists) throw new AppError('User not found', 404)
+
     if (props.email) {
       const emailAlreadyRegistered = await this.userRepository.findByEmail(
         props.email,

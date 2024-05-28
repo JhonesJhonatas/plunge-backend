@@ -3,6 +3,7 @@ export default {
   testEnvironment: 'node',
   transform: {},
   extensionsToTreatAsEsm: ['.ts'],
+  coverageReporters: ['json', 'html', 'text'],
   setupFiles: ['./src/shared/tests/@setup/index.ts'],
   globals: {
     'ts-jest': {
