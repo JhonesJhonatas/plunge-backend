@@ -1,4 +1,4 @@
-name: Deploy to Railway
+name: On Push Deploy
 
 on:
   push:
@@ -27,6 +27,6 @@ jobs:
         run: npm i -g @railway/cli
 
       - name: Deploy
-        run: railway up --service f3d20286-ecef-4ecf-aace-9c0a78430c57
+        run: railway up --service ${{ secrets.SERVICE }}
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
