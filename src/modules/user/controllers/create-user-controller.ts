@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { CreateUserUseCase } from '@user/use-cases/create-user'
+import { CreateUserUseCase } from '@user/use-cases/create-user-use-case'
 
 export class CreateUserController {
   async handle(request: Request, response: Response) {

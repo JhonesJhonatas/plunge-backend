@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { DeleteTopicUseCase } from '../use-cases/delete'
+import { DeleteTopicUseCase } from '../use-cases/delete-topic-use-case'
 
 export class DeleteTopicController {
   async handle(request: Request, response: Response) {

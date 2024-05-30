@@ -1,4 +1,4 @@
-import { CreateUserUseCase } from '@user/use-cases/create-user'
+import { CreateUserUseCase } from '@user/use-cases/create-user-use-case'
 import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
 import { AppError } from '@/errors/app-error'
 

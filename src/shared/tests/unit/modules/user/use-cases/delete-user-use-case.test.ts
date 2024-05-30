@@ -1,7 +1,7 @@
 import { AppError } from '@/errors/app-error'
 import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
-import { CreateUserUseCase } from '@user/use-cases/create-user'
-import { DeleteUserUseCase } from '@user/use-cases/delete'
+import { CreateUserUseCase } from '@user/use-cases/create-user-use-case'
+import { DeleteUserUseCase } from '@user/use-cases/delete-user-use-case'
 
 const userRepository = new InMemoryUserRepository()
 const createUserUseCase = new CreateUserUseCase(userRepository)

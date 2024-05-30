@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { CreateManyTopicsController } from '@topic/controllers/create-many'
-import { FindAllTopicsController } from '@topic/controllers/find-all'
-import { DeleteTopicController } from '@topic/controllers/delete'
+import { CreateManyTopicsController } from '@topic/controllers/create-many-topics-controller'
+import { FindAllTopicsController } from '@topic/controllers/find-all-topics-controller'
+import { DeleteTopicController } from '@topic/controllers/delete-topic-controller'
 
 export const topicRoutes = Router()
 

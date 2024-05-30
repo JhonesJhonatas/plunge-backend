@@ -27,6 +27,7 @@ export class PostRepository implements IPostRepository {
       data: {
         content,
         mediaUrl,
+        edited: true,
       },
     })
 

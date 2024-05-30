@@ -1,5 +1,5 @@
-import { DeletePostUseCase } from '@/modules/post/use-cases/delete-post'
 import { InMemoryPostRepository } from '@post/repository/implementations/in-memory-post-repository'
+import { DeletePostUseCase } from '@/modules/post/use-cases/delete-post-use-case'
 
 let deletePostUseCase: DeletePostUseCase
 

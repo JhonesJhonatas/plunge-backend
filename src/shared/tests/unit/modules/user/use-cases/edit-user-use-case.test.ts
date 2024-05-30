@@ -1,7 +1,9 @@
-import { AppError } from '@/errors/app-error'
-import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
-import { EditUserUseCase } from '@user/use-cases/edit-user'
 import bcrypt from 'bcrypt'
+
+import { AppError } from '@/errors/app-error'
+
+import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
+import { EditUserUseCase } from '@user/use-cases/edit-user-use-case'
 
 const userRepository = new InMemoryUserRepository()
 const editUserUseCase = new EditUserUseCase(userRepository)

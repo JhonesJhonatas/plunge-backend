@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { CreateManyTopicsUseCase } from '../use-cases/create-many'
+import { CreateManyTopicsUseCase } from '../use-cases/create-many-topics-use-case'
 
 export class CreateManyTopicsController {
   async handle(request: Request, response: Response) {

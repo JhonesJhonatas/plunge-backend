@@ -1,5 +1,5 @@
 import { AppError } from '@/errors/app-error'
-import { EditPostUseCase } from '@/modules/post/use-cases/edit-post'
+import { EditPostUseCase } from '@/modules/post/use-cases/edit-post-use-case'
 import { InMemoryPostRepository } from '@post/repository/implementations/in-memory-post-repository'
 
 let editPostUseCase: EditPostUseCase

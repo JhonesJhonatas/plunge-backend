@@ -1,4 +1,4 @@
-import { GetPostsUseCase } from '@/modules/post/use-cases/get-posts'
+import { GetPostsUseCase } from '@/modules/post/use-cases/get-posts-use-case'
 import { InMemoryPostRepository } from '@post/repository/implementations/in-memory-post-repository'
 
 let getPostsUseCase: GetPostsUseCase

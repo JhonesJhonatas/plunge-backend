@@ -1,4 +1,4 @@
-import { CreateManyTopicsUseCase } from '@topic/use-cases/create-many'
+import { CreateManyTopicsUseCase } from '@topic/use-cases/create-many-topics-use-case'
 import { InMemoryTopicRepository } from '@topic/repository/implementations/in-memory-topic-repository'
 
 const topicRepository = new InMemoryTopicRepository()

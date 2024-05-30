@@ -9,6 +9,9 @@ import { TopicRepository } from '@topic/repository/implementations/topic-reposit
 import { IPostRepository } from '@post/repository/i-post-repository'
 import { PostRepository } from '@post/repository/implementations/post-repository'
 
+import { ICommentRepository } from '@comment/repository/i-comment-repository'
+import { CommentRepository } from '@comment/repository/implementations/comment-repository'
+
 container.registerSingleton<IUserRepository>('UserRepository', UserRepository)
 
 container.registerSingleton<ITopicRepository>(
@@ -17,3 +20,8 @@ container.registerSingleton<ITopicRepository>(
 )
 
 container.registerSingleton<IPostRepository>('PostRepository', PostRepository)
+
+container.registerSingleton<ICommentRepository>(
+  'CommentRepository',
+  CommentRepository,
+)

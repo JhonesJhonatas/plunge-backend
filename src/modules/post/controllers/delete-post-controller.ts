@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 import { Request, Response } from 'express'
 
-import { DeletePostUseCase } from '@post/use-cases/delete-post'
+import { DeletePostUseCase } from '@post/use-cases/delete-post-use-case'
 
 export class DeletePostController {
   async handle(request: Request, response: Response) {

@@ -1,5 +1,5 @@
 import { AppError } from '@/errors/app-error'
-import { CreatePostUseCase } from '@/modules/post/use-cases/create-post'
+import { CreatePostUseCase } from '@/modules/post/use-cases/create-post-use-case'
 import { InMemoryUserRepository } from '@/modules/user/repository/implementations/in-memory-user-repository'
 import { InMemoryPostRepository } from '@post/repository/implementations/in-memory-post-repository'
 

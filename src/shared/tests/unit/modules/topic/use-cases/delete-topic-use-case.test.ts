@@ -1,5 +1,5 @@
 import { InMemoryTopicRepository } from '@topic/repository/implementations/in-memory-topic-repository'
-import { DeleteTopicUseCase } from '@/modules/topic/use-cases/delete'
+import { DeleteTopicUseCase } from '@/modules/topic/use-cases/delete-topic-use-case'
 import { AppError } from '@/errors/app-error'
 
 const topicRepository = new InMemoryTopicRepository()

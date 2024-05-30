@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import { container } from 'tsyringe'
 
-import { FindAllTopicsUseCase } from '../use-cases/find-all'
+import { FindAllTopicsUseCase } from '../use-cases/find-all-topics-use-case'
 
 export class FindAllTopicsController {
   async handle(request: Request, response: Response) {

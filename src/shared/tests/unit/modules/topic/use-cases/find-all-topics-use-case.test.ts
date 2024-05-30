@@ -1,5 +1,5 @@
 import { InMemoryTopicRepository } from '@topic/repository/implementations/in-memory-topic-repository'
-import { FindAllTopicsUseCase } from '@/modules/topic/use-cases/find-all'
+import { FindAllTopicsUseCase } from '@/modules/topic/use-cases/find-all-topics-use-case'
 
 const topicRepository = new InMemoryTopicRepository()
 const findAllTopicsUseCase = new FindAllTopicsUseCase(topicRepository)

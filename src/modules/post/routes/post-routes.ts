@@ -1,9 +1,9 @@
 import { Router } from 'express'
 
-import { CreatePostController } from '@post/controllers/create'
-import { DeletePostController } from '@post/controllers/delete'
-import { EditPostController } from '@post/controllers/edit'
-import { GetPostsController } from '@post/controllers/get'
+import { CreatePostController } from '@post/controllers/create-post-controller'
+import { DeletePostController } from '@post/controllers/delete-post-controller'
+import { EditPostController } from '@post/controllers/edit-post-controller'
+import { GetPostsController } from '@post/controllers/get-posts-controller'
 
 export const postRoutes = Router()
 

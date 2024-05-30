@@ -1,14 +1,14 @@
 import { Router } from 'express'
 
-import { CreateUserController } from '@user/controllers/create-user'
+import { CreateUserController } from '@user/controllers/create-user-controller'
 import { createUserParse } from '@user/middlewares/create-user-parse'
 
-import { EditUserController } from '@user/controllers/edit-user'
+import { EditUserController } from '@user/controllers/edit-user-controller'
 import { editUserParse } from '@user/middlewares/edit-user-parse'
 
-import { FindAllUsersController } from '@user/controllers/find-all'
+import { FindAllUsersController } from '@user/controllers/find-all-users-controller'
 
-import { DeleteUserController } from '@user/controllers/delete'
+import { DeleteUserController } from '@user/controllers/delete-user-controller'
 
 export const userRoutes = Router()
 

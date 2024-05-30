@@ -1,7 +1,7 @@
 import { container } from 'tsyringe'
 import { Request, Response } from 'express'
 
-import { GetPostsUseCase } from '../use-cases/get-posts'
+import { GetPostsUseCase } from '../use-cases/get-posts-use-case'
 
 export class GetPostsController {
   async handle(request: Request, response: Response) {
