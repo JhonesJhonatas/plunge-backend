@@ -10,9 +10,21 @@
     "skipLibCheck": true,
     "baseUrl": "./src/",
     "paths": {
-      "@/*": ["*"],
-      "@user/*": ["modules/user/*"],
-      "@topic/*": ["modules/topic/*"]
+      "@/*": [
+        "*"
+      ],
+      "@user/*": [
+        "modules/user/*"
+      ],
+      "@topic/*": [
+        "modules/topic/*"
+      ],
+      "@post/*": [
+        "modules/post/*"
+      ],
+      "@comment/*": [
+        "modules/comment/*"
+      ]
     }
   }
 }
