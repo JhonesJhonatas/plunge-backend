@@ -8,4 +8,6 @@ export interface IPostRepository {
   edit({ id, content, mediaUrl }: IEditPostDTO): Promise<Post>
   delete(id: string): Promise<Post>
   get(): Promise<Post[]>
+
+  getById(id: string): Promise<Post | null>
 }

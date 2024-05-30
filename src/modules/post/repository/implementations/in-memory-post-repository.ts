@@ -76,4 +76,10 @@ export class InMemoryPostRepository implements IPostRepository {
   async get(): Promise<Post[]> {
     return this.posts
   }
+
+  async getById(id: string): Promise<Post | null> {
+    const post = this.posts.find((post) => post.id === id) || null
+
+    return post
+  }
 }

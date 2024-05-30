@@ -27,6 +27,19 @@ describe('create-post-use-case', () => {
     expect(post.userId).toBe(postToCreate.userId)
   })
 
+  it('should be able to create a post without a mediaUrl', async () => {
+    const postToCreate = {
+      content: 'content',
+      userId: 'd51feab3-b0df-468f-928a-b06e11776bed',
+    }
+
+    const post = await createPostUseCase.execute(postToCreate)
+
+    expect(post).toHaveProperty('id')
+    expect(post.content).toBe(postToCreate.content)
+    expect(post.userId).toBe(postToCreate.userId)
+  })
+
   it('should not be able to create post with invalid user id', async () => {
     const postToCreate = {
       content: 'content',
