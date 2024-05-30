@@ -1,16 +1,16 @@
 import { inject, injectable } from 'tsyringe'
+import { AppError } from '@/errors/app-error'
 
 import { IPostRepository } from '@post/repository/i-post-repository'
-import { ICreatePostDTO } from '../dto/i-create-post-dto'
+import { ICreatePostDTO } from '@post/dto/i-create-post-dto'
 
-import { UserRepository } from '@/modules/user/repository/implementations/user-repository'
-import { AppError } from '@/errors/app-error'
+import { IUserRepository } from '@user/repository/i-user-repository'
 
 @injectable()
 export class CreatePostUseCase {
   constructor(
     @inject('UserRepository')
-    private userRepository: UserRepository,
+    private userRepository: IUserRepository,
 
     @inject('PostRepository')
     private postRepository: IPostRepository,

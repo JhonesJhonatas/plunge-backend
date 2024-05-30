@@ -6,7 +6,19 @@ import { ICreatePostDTO } from '@post/dto/i-create-post-dto'
 import { IEditPostDTO } from '@post/dto/i-edit-post-dto'
 
 export class InMemoryPostRepository implements IPostRepository {
-  private posts: Post[] = []
+  private posts: Post[] = [
+    {
+      id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
+      content: '',
+      mediaUrl: '',
+      userId: '',
+      ups: 0,
+      downs: 0,
+      edited: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ]
 
   async create({ content, mediaUrl, userId }: ICreatePostDTO): Promise<Post> {
     const post = {
