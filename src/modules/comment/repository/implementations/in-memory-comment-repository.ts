@@ -6,7 +6,19 @@ import { IEditCommentDTO } from '@comment/dto/i-edit-comment-dto'
 import { randomUUID } from 'crypto'
 
 export class InMemoryCommentRepository implements ICommentRepository {
-  private comments: Comment[] = []
+  private comments: Comment[] = [
+    {
+      id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
+      content: 'comment content',
+      ups: 0,
+      downs: 0,
+      postId: 'post-id',
+      userId: 'user-id',
+      edited: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ]
 
   create({ content, postId, userId }: ICreateCommentDTO): Promise<Comment> {
     const randomId = randomUUID()
