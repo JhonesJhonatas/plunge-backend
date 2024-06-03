@@ -1,7 +1,8 @@
-import { PrismaClient, Topic } from '@prisma/client'
+import { PrismaClient, Topic, UserTopic } from '@prisma/client'
 
 import { ITopicRepository } from '@topic/repository/i-topic-repository'
 import { ICreateTopicDTO } from '@topic/dto/i-create-topic-dto'
+import { ICreateUserTopicDTO } from '../../dto/user-topic/i-create-user-topic'
 
 const prismaClient = new PrismaClient()
 
@@ -38,5 +39,25 @@ export class TopicRepository implements ITopicRepository {
     })
 
     return deletedTopic
+  }
+
+  async createUserTopic({
+    topicId,
+    userId,
+  }: ICreateUserTopicDTO): Promise<UserTopic> {
+    return await prismaClient.userTopic.create({
+      data: {
+        topicId,
+        userId,
+      },
+    })
+  }
+
+  async getUserTopics(userId: string): Promise<UserTopic[]> {
+    return await prismaClient.userTopic.findMany({
+      where: {
+        userId,
+      },
+    })
   }
 }

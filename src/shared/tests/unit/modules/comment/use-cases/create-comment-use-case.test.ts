@@ -4,6 +4,7 @@ import { CreateCommentUseCase } from '@/modules/comment/use-cases/create-comment
 
 import { InMemoryPostRepository } from '@/modules/post/repository/implementations/in-memory-post-repository'
 import { CreatePostUseCase } from '@/modules/post/use-cases/create-post-use-case'
+import { InMemoryTopicRepository } from '@/modules/topic/repository/implementations/in-memory-topic-repository'
 import { InMemoryUserRepository } from '@/modules/user/repository/implementations/in-memory-user-repository'
 import { CreateUserUseCase } from '@/modules/user/use-cases/create-user-use-case'
 import { InMemoryCommentRepository } from '@comment/repository/implementations/in-memory-comment-repository'
@@ -17,8 +18,9 @@ describe('create-comment-use-case', () => {
     const commentRepository = new InMemoryCommentRepository()
     const userRepository = new InMemoryUserRepository()
     const postRepository = new InMemoryPostRepository()
+    const topicRepository = new InMemoryTopicRepository()
 
-    createUserUseCase = new CreateUserUseCase(userRepository)
+    createUserUseCase = new CreateUserUseCase(userRepository, topicRepository)
 
     createPostUseCase = new CreatePostUseCase(userRepository, postRepository)
 
@@ -38,6 +40,7 @@ describe('create-comment-use-case', () => {
       birthDate: new Date('1995-12-24'),
       avatarUrl: 'https://example.com/avatar.jpg',
       coverUrl: 'https://example.com/cover.jpg',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const createdPost = await createPostUseCase.execute({
@@ -66,6 +69,7 @@ describe('create-comment-use-case', () => {
       birthDate: new Date('1995-12-24'),
       avatarUrl: 'https://example.com/avatar.jpg',
       coverUrl: 'https://example.com/cover.jpg',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const commentToCreate: ICreateCommentDTO = {
@@ -88,6 +92,7 @@ describe('create-comment-use-case', () => {
       birthDate: new Date('1995-12-24'),
       avatarUrl: 'https://example.com/avatar.jpg',
       coverUrl: 'https://example.com/cover.jpg',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const createdPost = await createPostUseCase.execute({

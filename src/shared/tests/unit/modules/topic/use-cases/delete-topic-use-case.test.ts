@@ -8,7 +8,7 @@ const deleteTopicUseCase = new DeleteTopicUseCase(topicRepository)
 describe('delete-topic-use-case', () => {
   it('should be able to delete topic', async () => {
     const deletedTopic = await deleteTopicUseCase.execute(
-      'd51feab3-b0df-468f-928a-b06e11776bed',
+      '4728fa8e-92ad-46ca-9322-0d333f11c11f',
     )
 
     expect(deletedTopic).toHaveProperty('id')

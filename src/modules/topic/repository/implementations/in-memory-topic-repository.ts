@@ -1,17 +1,29 @@
 import { randomUUID } from 'crypto'
 
-import { Topic } from '@prisma/client'
+import { Topic, UserTopic } from '@prisma/client'
 
 import { ITopicRepository } from '@topic/repository/i-topic-repository'
 import { ICreateTopicDTO } from '@topic/dto/i-create-topic-dto'
+import { ICreateUserTopicDTO } from '../../dto/user-topic/i-create-user-topic'
 
 export class InMemoryTopicRepository implements ITopicRepository {
   private topics: Topic[] = [
     {
-      id: 'd51feab3-b0df-468f-928a-b06e11776bed',
+      id: '4728fa8e-92ad-46ca-9322-0d333f11c11f',
       title: 'React',
       createdAt: new Date('2024-05-25T06:33:34.631Z'),
       updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+    },
+  ]
+
+  private userTopics: UserTopic[] = [
+    {
+      topicId: '4728fa8e-92ad-46ca-9322-0d333f11c11f',
+      userId: 'd51feab3-b0df-468f-928a-b06e11776bed',
+    },
+    {
+      topicId: '4728fa8e-92ad-46ca-9322-0d333f11c11f',
+      userId: 'd51feab3-b0df-468f-928a-b06e11776bes',
     },
   ]
 
@@ -44,5 +56,30 @@ export class InMemoryTopicRepository implements ITopicRepository {
     const deletedTopic = this.topics.splice(topicIndex, 1)[0]
 
     return Promise.resolve(deletedTopic)
+  }
+
+  async createUserTopic({
+    topicId,
+    userId,
+  }: ICreateUserTopicDTO): Promise<UserTopic> {
+    const userTopic = {
+      id: randomUUID(),
+      topicId,
+      userId,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
+
+    this.userTopics.push(userTopic)
+
+    return userTopic
+  }
+
+  async getUserTopics(userId: string): Promise<UserTopic[]> {
+    const userTopics = this.userTopics.filter(
+      (userTopic) => userTopic.userId === userId,
+    )
+
+    return userTopics
   }
 }
