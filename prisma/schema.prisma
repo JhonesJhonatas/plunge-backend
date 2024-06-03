@@ -8,59 +8,41 @@ datasource db {
 }
 
 model User {
-  id        String      @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  userName  String      @unique
-  email     String      @unique
+  userName  String    @unique
+  email     String    @unique
   password  String
   birthDate DateTime
   avatarUrl String?
   coverUrl  String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  topics    String[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
   posts     Post[]
   comments  Comment[]
-  topics    UserTopic[]
 }
 
 model Post {
-  id        String      @id @default(uuid())
+  id        String    @id @default(uuid())
   content   String
-  ups       Int         @default(0)
-  downs     Int         @default(0)
+  ups       Int       @default(0)
+  downs     Int       @default(0)
   mediaUrl  String?
   userId    String?
-  edited    Boolean     @default(false)
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  User      User?       @relation(fields: [userId], references: [id])
+  topics    String[]
+  edited    Boolean   @default(false)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  User      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments  Comment[]
-  PostTopic PostTopic[]
 }
 
 model Topic {
-  id        String      @id @default(uuid())
+  id        String   @id @default(uuid())
   title     String
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  users     UserTopic[]
-  topics    PostTopic[]
-}
-
-model UserTopic {
-  id      String @id @default(uuid())
-  userId  String
-  topicId String
-  User    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
-}
-
-model PostTopic {
-  id      String @id @default(uuid())
-  postId  String
-  topicId String
-  Post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
-  Topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Comment {

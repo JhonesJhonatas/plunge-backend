@@ -18,11 +18,9 @@ export class CreateUserUseCase {
   ) {}
 
   async execute(user: ICreateUserDTO) {
-    const { topics, ...rest } = user
-
     const [userAlreadyRegistered, userNameAlreadyTaken] = await Promise.all([
-      this.userRepository.findByEmail(rest.email),
-      this.userRepository.findByUserName(rest.userName),
+      this.userRepository.findByEmail(user.email),
+      this.userRepository.findByUserName(user.userName),
     ])
 
     if (userAlreadyRegistered)
@@ -30,11 +28,10 @@ export class CreateUserUseCase {
 
     if (userNameAlreadyTaken) throw new AppError('Username already taken', 400)
 
-    if (!topics) {
+    if (!user.topics.length)
       throw new AppError('At lest one topic is required', 400)
-    }
 
-    const topicsWithoutDuplicates = Array.from(new Set(topics))
+    const topicsWithoutDuplicates = Array.from(new Set(user.topics))
 
     for (const topicId of topicsWithoutDuplicates) {
       const topic = await this.topicRepository.findById(topicId)
@@ -45,26 +42,10 @@ export class CreateUserUseCase {
     const passwordHash = await hash(user.password, 8)
 
     const createdUser = await this.userRepository.create({
-      ...rest,
+      ...user,
       password: passwordHash,
     })
 
-    for (const topicId of topicsWithoutDuplicates) {
-      await this.topicRepository.createUserTopic({
-        topicId,
-        userId: createdUser.id,
-      })
-    }
-
-    const createdTopics = await this.topicRepository.getUserTopics(
-      createdUser.id,
-    )
-
-    const formattedTopics = createdTopics.map((topic) => topic.topicId)
-
-    return {
-      ...createdUser,
-      topics: formattedTopics,
-    }
+    return createdUser
   }
 }

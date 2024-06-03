@@ -97,6 +97,7 @@ describe('create-user-use-case', () => {
       email: 'tester3@example.com',
       password: 'senha123',
       birthDate: new Date('1995-12-24'),
+      topics: [],
     }
 
     await expect(createUserUseCase.execute(userToCreate)).rejects.toEqual(

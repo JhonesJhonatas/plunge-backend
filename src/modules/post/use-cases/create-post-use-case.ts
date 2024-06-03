@@ -16,11 +16,18 @@ export class CreatePostUseCase {
     private postRepository: IPostRepository,
   ) {}
 
-  async execute({ userId, content, mediaUrl }: ICreatePostDTO) {
+  async execute({ userId, content, mediaUrl, topics }: ICreatePostDTO) {
     const user = await this.userRepository.findById(userId)
 
     if (!user) throw new AppError('User not found', 404)
 
-    return await this.postRepository.create({ userId, content, mediaUrl })
+    if (!topics.length) throw new AppError('Topics cannot be empty', 400)
+
+    return await this.postRepository.create({
+      userId,
+      content,
+      mediaUrl,
+      topics,
+    })
   }
 }

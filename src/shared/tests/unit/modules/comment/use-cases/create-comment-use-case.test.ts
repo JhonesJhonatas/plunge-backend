@@ -47,6 +47,7 @@ describe('create-comment-use-case', () => {
       content: 'post content',
       mediaUrl: 'mediaUrl',
       userId: createdUser.id,
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const commentToCreate: ICreateCommentDTO = {
@@ -99,6 +100,7 @@ describe('create-comment-use-case', () => {
       content: 'post content',
       mediaUrl: 'mediaUrl',
       userId: createdUser.id,
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const commentToCreate: ICreateCommentDTO = {

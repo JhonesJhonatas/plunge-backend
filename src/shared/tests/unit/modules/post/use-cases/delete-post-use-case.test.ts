@@ -19,6 +19,7 @@ describe('delete-post-use-case', () => {
       content: '',
       mediaUrl: '',
       userId: '',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
       ups: 0,
       downs: 0,
       edited: false,

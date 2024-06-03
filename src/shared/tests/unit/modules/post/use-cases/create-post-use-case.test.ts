@@ -17,6 +17,7 @@ describe('create-post-use-case', () => {
       content: 'content',
       mediaUrl: 'mediaUrl',
       userId: 'd51feab3-b0df-468f-928a-b06e11776bed',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     }
 
     const post = await createPostUseCase.execute(postToCreate)
@@ -31,6 +32,7 @@ describe('create-post-use-case', () => {
     const postToCreate = {
       content: 'content',
       userId: 'd51feab3-b0df-468f-928a-b06e11776bed',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     }
 
     const post = await createPostUseCase.execute(postToCreate)
@@ -45,10 +47,24 @@ describe('create-post-use-case', () => {
       content: 'content',
       mediaUrl: 'mediaUrl',
       userId: 'invalid-user-id',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     }
 
     await expect(createPostUseCase.execute(postToCreate)).rejects.toEqual(
       new AppError('User not found', 404),
+    )
+  })
+
+  it('should not be able to create post without topics', async () => {
+    const postToCreate = {
+      content: 'content',
+      mediaUrl: 'mediaUrl',
+      userId: 'd51feab3-b0df-468f-928a-b06e11776bed',
+      topics: [],
+    }
+
+    await expect(createPostUseCase.execute(postToCreate)).rejects.toEqual(
+      new AppError('Topics cannot be empty', 400),
     )
   })
 })
