@@ -24,17 +24,18 @@ model User {
 }
 
 model Post {
-  id        String    @id @default(uuid())
+  id        String      @id @default(uuid())
   content   String
-  ups       Int       @default(0)
-  downs     Int       @default(0)
+  ups       Int         @default(0)
+  downs     Int         @default(0)
   mediaUrl  String?
   userId    String?
-  edited    Boolean   @default(false)
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  User      User?     @relation(fields: [userId], references: [id])
+  edited    Boolean     @default(false)
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  User      User?       @relation(fields: [userId], references: [id])
   comments  Comment[]
+  PostTopic PostTopic[]
 }
 
 model Topic {
@@ -43,6 +44,7 @@ model Topic {
   createdAt DateTime    @default(now())
   updatedAt DateTime    @updatedAt
   users     UserTopic[]
+  topics    PostTopic[]
 }
 
 model UserTopic {
@@ -50,6 +52,14 @@ model UserTopic {
   userId  String
   topicId String
   User    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
+}
+
+model PostTopic {
+  id      String @id @default(uuid())
+  postId  String
+  topicId String
+  Post    Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
   Topic   Topic  @relation(fields: [topicId], references: [id], onDelete: Cascade)
 }
 
