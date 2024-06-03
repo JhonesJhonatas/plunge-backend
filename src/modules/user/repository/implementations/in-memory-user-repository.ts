@@ -18,6 +18,7 @@ export class InMemoryUserRepository implements IUserRepository {
       coverUrl: 'https://example.com/cover.jpg',
       createdAt: new Date('2024-05-25T06:33:34.631Z'),
       updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     },
     {
       id: 'd51feab3-b0df-468f-928a-b06e11776bes',
@@ -30,6 +31,7 @@ export class InMemoryUserRepository implements IUserRepository {
       coverUrl: 'https://example.com/cover.jpg',
       createdAt: new Date('2024-05-25T06:33:34.631Z'),
       updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     },
   ]
 

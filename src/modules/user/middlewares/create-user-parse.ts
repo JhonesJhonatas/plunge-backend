@@ -18,6 +18,7 @@ const validationSchema = z.object({
     }),
   avatarUrl: z.string().url({ message: 'Invalid URL' }).nullable(),
   coverUrl: z.string().url({ message: 'Invalid URL' }).nullable(),
+  topics: z.array(z.string()),
 })
 
 export type UserSchema = z.infer<typeof validationSchema>

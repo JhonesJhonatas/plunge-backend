@@ -1,7 +1,9 @@
-import { InMemoryUserRepository } from '@/modules/user/repository/implementations/in-memory-user-repository'
-import { FindAllUsersUseCase } from '@/modules/user/use-cases/find-all-users-use-case'
+import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
+
+import { FindAllUsersUseCase } from '@user/use-cases/find-all-users-use-case'
 
 const userRepository = new InMemoryUserRepository()
+
 const findAllUsersUseCase = new FindAllUsersUseCase(userRepository)
 
 describe('find-all-users-use-case', () => {

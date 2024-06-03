@@ -6,4 +6,5 @@ export interface ICreateUserDTO {
   birthDate: Date
   avatarUrl?: string
   coverUrl?: string
+  topics: string[]
 }

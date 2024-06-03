@@ -27,12 +27,14 @@ describe('get-post-use-case', () => {
       id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
       content: 'new content',
       mediaUrl: 'new media url',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     expect(post).toEqual({
       id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
       content: 'new content',
       mediaUrl: 'new media url',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
       userId: '',
       ups: 0,
       downs: 0,
@@ -46,6 +48,7 @@ describe('get-post-use-case', () => {
     const post = await editPostUseCase.execute({
       id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
       mediaUrl: 'new media url',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     expect(post).toEqual({
@@ -53,6 +56,7 @@ describe('get-post-use-case', () => {
       mediaUrl: 'new media url',
       content: '',
       userId: '',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
       ups: 0,
       downs: 0,
       edited: true,
@@ -65,12 +69,14 @@ describe('get-post-use-case', () => {
     const post = await editPostUseCase.execute({
       id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
       content: 'new media url',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     expect(post).toEqual({
       id: 'c9ab66be-7bbb-40fa-96c7-58f22589f141',
       mediaUrl: '',
       content: 'new media url',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
       userId: '',
       ups: 0,
       downs: 0,

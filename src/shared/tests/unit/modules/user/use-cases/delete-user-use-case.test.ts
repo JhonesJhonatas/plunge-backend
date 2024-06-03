@@ -1,10 +1,13 @@
 import { AppError } from '@/errors/app-error'
+import { InMemoryTopicRepository } from '@/modules/topic/repository/implementations/in-memory-topic-repository'
 import { InMemoryUserRepository } from '@user/repository/implementations/in-memory-user-repository'
 import { CreateUserUseCase } from '@user/use-cases/create-user-use-case'
 import { DeleteUserUseCase } from '@user/use-cases/delete-user-use-case'
 
 const userRepository = new InMemoryUserRepository()
-const createUserUseCase = new CreateUserUseCase(userRepository)
+const topicRepository = new InMemoryTopicRepository()
+
+const createUserUseCase = new CreateUserUseCase(userRepository, topicRepository)
 const deleteUserUseCase = new DeleteUserUseCase(userRepository)
 
 describe('delete-user-use-case', () => {
@@ -17,6 +20,7 @@ describe('delete-user-use-case', () => {
       birthDate: new Date('1995-12-24T00:00:00.000Z'),
       avatarUrl: 'https://example.com/avatar.jpg',
       coverUrl: 'https://example.com/cover.jpg',
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
     })
 
     const deletedUser = await deleteUserUseCase.execute(createdUser.id)

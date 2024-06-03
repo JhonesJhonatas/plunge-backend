@@ -11,11 +11,11 @@ export class EditPostUseCase {
     private postRepository: IPostRepository,
   ) {}
 
-  async execute({ id, content, mediaUrl }: IEditPostDTO) {
+  async execute({ id, content, mediaUrl, topics }: IEditPostDTO) {
     const post = await this.postRepository.getById(id)
 
     if (!post) throw new AppError('Post not found', 404)
 
-    return await this.postRepository.edit({ id, content, mediaUrl })
+    return await this.postRepository.edit({ id, content, mediaUrl, topics })
   }
 }

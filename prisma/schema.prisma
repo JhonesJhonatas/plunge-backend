@@ -16,17 +16,11 @@ model User {
   birthDate DateTime
   avatarUrl String?
   coverUrl  String?
+  topics    String[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   posts     Post[]
   comments  Comment[]
-}
-
-model Topic {
-  id        String   @id @default(uuid())
-  title     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
 
 model Post {
@@ -36,11 +30,19 @@ model Post {
   downs     Int       @default(0)
   mediaUrl  String?
   userId    String?
+  topics    String[]
   edited    Boolean   @default(false)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  User      User?     @relation(fields: [userId], references: [id])
+  User      User?     @relation(fields: [userId], references: [id], onDelete: Cascade)
   comments  Comment[]
+}
+
+model Topic {
+  id        String   @id @default(uuid())
+  title     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Comment {

@@ -7,19 +7,25 @@ import { IEditPostDTO } from '@post/dto/i-edit-post-dto'
 export class PostRepository implements IPostRepository {
   private prismaClient = new PrismaClient()
 
-  async create({ content, mediaUrl, userId }: ICreatePostDTO): Promise<Post> {
+  async create({
+    content,
+    mediaUrl,
+    userId,
+    topics,
+  }: ICreatePostDTO): Promise<Post> {
     const createdPost = await this.prismaClient.post.create({
       data: {
         content,
         mediaUrl,
         userId,
+        topics,
       },
     })
 
     return createdPost
   }
 
-  async edit({ id, content, mediaUrl }: IEditPostDTO): Promise<Post> {
+  async edit({ id, content, mediaUrl, topics }: IEditPostDTO): Promise<Post> {
     const editedPost = await this.prismaClient.post.update({
       where: {
         id,
@@ -28,6 +34,7 @@ export class PostRepository implements IPostRepository {
         content,
         mediaUrl,
         edited: true,
+        topics,
       },
     })
 

@@ -5,7 +5,7 @@ import { CreatePostUseCase } from '@post/use-cases/create-post-use-case'
 
 export class CreatePostController {
   async handle(request: Request, response: Response) {
-    const { content, userId, mediaUrl } = request.body
+    const { content, userId, mediaUrl, topics } = request.body
 
     const createManyTopicsUseCase = container.resolve(CreatePostUseCase)
 
@@ -13,6 +13,7 @@ export class CreatePostController {
       content,
       userId,
       mediaUrl,
+      topics,
     })
 
     return response.status(200).json(createdPost)
