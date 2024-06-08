@@ -2,8 +2,8 @@ import { randomUUID } from 'crypto'
 import { User } from '@prisma/client'
 
 import { IUserRepository } from '@user/repository/i-user-repository'
-import { ICreateUserDTO } from '../../dto/i-create-user-dto'
-import { IEditUserDTO } from '../../dto/i-edit-user-dto'
+import { ICreateUserDTO } from '@user/dto/i-create-user-dto'
+import { IEditUserDTO } from '@user/dto/i-edit-user-dto'
 
 export class InMemoryUserRepository implements IUserRepository {
   private users: User[] = [
@@ -26,6 +26,19 @@ export class InMemoryUserRepository implements IUserRepository {
       userName: 'blitzwolf',
       email: 'blitzwolf@example.com',
       password: 'senha123',
+      birthDate: new Date('1995-12-24T00:00:00.000Z'),
+      avatarUrl: 'https://example.com/avatar.jpg',
+      coverUrl: 'https://example.com/cover.jpg',
+      createdAt: new Date('2024-05-25T06:33:34.631Z'),
+      updatedAt: new Date('2024-05-28T00:36:23.388Z'),
+      topics: ['4728fa8e-92ad-46ca-9322-0d333f11c11f'],
+    },
+    {
+      id: 'd51feab3-b0df-468f-928a-b06e11776bes',
+      name: 'Auth Test',
+      userName: 'authTest',
+      email: 'auth-test@example.com',
+      password: '$2b$08$Htotk7hbwkX1cmCZUqDVOuQ7ik8FHy7E2OOAjkffIA4TUrpmBLloO',
       birthDate: new Date('1995-12-24T00:00:00.000Z'),
       avatarUrl: 'https://example.com/avatar.jpg',
       coverUrl: 'https://example.com/cover.jpg',

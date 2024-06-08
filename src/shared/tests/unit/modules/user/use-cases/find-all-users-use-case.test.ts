@@ -10,6 +10,10 @@ describe('find-all-users-use-case', () => {
   it('should be able to find all users', async () => {
     const users = await findAllUsersUseCase.execute()
 
+    console.log('---------- DEBUG ----------')
+    console.log(users)
+    console.log('---------- DEBUG ----------')
+
     expect(users).toBeInstanceOf(Array)
   })
 })
