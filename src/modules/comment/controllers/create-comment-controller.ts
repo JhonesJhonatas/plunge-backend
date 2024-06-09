@@ -5,14 +5,15 @@ import { CreateCommentUseCase } from '@comment/use-cases/create-comment-use-case
 
 export class CreateCommentController {
   async handle(request: Request, response: Response) {
-    const { content, postId, userId } = request.body
+    const { id } = request.user
+    const { content, postId } = request.body
 
     const createCommnentUseCase = container.resolve(CreateCommentUseCase)
 
     const createdComment = await createCommnentUseCase.execute({
       content,
       postId,
-      userId,
+      userId: id,
     })
 
     return response.status(200).json(createdComment)
