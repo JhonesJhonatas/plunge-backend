@@ -2,13 +2,12 @@ import { PrismaClient, User } from '@prisma/client'
 
 import { IUserRepository } from '@user/repositories/i-user-repository'
 
-import { ICreateUserDto, IEditUserDto, ISearchUserDto } from '@user/dto'
+import { ICreateUserDto, IEditUserDto } from '@user/dto'
 
+const prismaClient = new PrismaClient()
 export class UserRepository implements IUserRepository {
-  private prismaClient = new PrismaClient()
-
   async create(params: ICreateUserDto): Promise<User> {
-    return await this.prismaClient.user.create({
+    return await prismaClient.user.create({
       data: params,
     })
   }
@@ -16,7 +15,7 @@ export class UserRepository implements IUserRepository {
   async edit(params: IEditUserDto): Promise<User> {
     const { id, ...rest } = params
 
-    return await this.prismaClient.user.update({
+    return await prismaClient.user.update({
       where: {
         id,
       },
@@ -27,7 +26,7 @@ export class UserRepository implements IUserRepository {
   }
 
   async findById(id: string): Promise<User | null> {
-    return await this.prismaClient.user.findUnique({
+    return await prismaClient.user.findUnique({
       where: {
         id,
       },
@@ -35,36 +34,30 @@ export class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User | null> {
-    return await this.prismaClient.user.findUnique({
+    return await prismaClient.user.findUnique({
       where: {
         email,
       },
     })
   }
 
-  async search(params: ISearchUserDto): Promise<User[]> {
-    const { name, email } = params
-
-    const whereClause = {}
-
-    if (name) {
-      Object.assign(whereClause, {
+  async searchByName(name: string): Promise<User[]> {
+    return await prismaClient.user.findMany({
+      where: {
         name: {
           contains: name,
         },
-      })
-    }
+      },
+    })
+  }
 
-    if (email) {
-      Object.assign(whereClause, {
+  async searchByEmail(email: string): Promise<User[]> {
+    return await prismaClient.user.findMany({
+      where: {
         email: {
           contains: email,
         },
-      })
-    }
-
-    return await this.prismaClient.user.findMany({
-      where: whereClause,
+      },
     })
   }
 }

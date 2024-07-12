@@ -1,11 +1,20 @@
 import { User } from '@prisma/client'
 import { randomUUID } from 'crypto'
 
-import { ICreateUserDto, IEditUserDto, ISearchUserDto } from '@user/dto'
+import { ICreateUserDto, IEditUserDto } from '@user/dto'
 import { IUserRepository } from '@user/repositories/i-user-repository'
 
-export class InMemoryRepository implements IUserRepository {
-  private users: User[] = []
+export class InMemoryUserRepository implements IUserRepository {
+  private users: User[] = [
+    {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      email: 'userinmemory@email.com',
+      name: 'User In Memory',
+      password: '123456',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+  ]
 
   async create(params: ICreateUserDto): Promise<User> {
     const user = {
@@ -44,17 +53,11 @@ export class InMemoryRepository implements IUserRepository {
     return this.users.find((user) => user.email === email) || null
   }
 
-  async search(params: ISearchUserDto): Promise<User[]> {
-    return this.users.filter((user) => {
-      if (params.name && !user.name.includes(params.name)) {
-        return false
-      }
+  async searchByName(name: string): Promise<User[]> {
+    return this.users.filter((user) => user.name.includes(name))
+  }
 
-      if (params.email && !user.email.includes(params.email)) {
-        return false
-      }
-
-      return true
-    })
+  async searchByEmail(email: string): Promise<User[]> {
+    return this.users.filter((user) => user.email.includes(email))
   }
 }

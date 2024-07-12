@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common'
-import { hash } from 'bcryptjs'
+import { hash } from 'bcrypt'
 
 import { AppError } from '@common/errors'
 

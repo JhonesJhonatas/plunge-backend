@@ -9,6 +9,14 @@ export class SearchUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
   async execute(params: SearchUserValidation) {
-    return await this.userRepository.search(params)
+    const { name, email } = params
+
+    if (name) {
+      return await this.userRepository.searchByName(name)
+    }
+
+    if (email) {
+      return await this.userRepository.searchByEmail(email)
+    }
   }
 }
