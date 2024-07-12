@@ -1,0 +1,11 @@
+version: '3'
+
+services: 
+  api-solid-pg:
+    image: bitnami/postgresql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=plunge-web
+      - POSTGRESQL_PASSWORD=plunge-pass
+      - POSTGRESQL_DATABASE=plunge-db
