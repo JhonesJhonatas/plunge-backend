@@ -31,7 +31,7 @@ export class EditUserService {
         params.email,
       )
 
-      if (userAlreadyExists) {
+      if (userAlreadyExists && userAlreadyExists.email !== user.email) {
         throw new AppError('Email already registered', 400)
       }
 
