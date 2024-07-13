@@ -14,10 +14,10 @@ CREATE TABLE "User" (
 CREATE TABLE "Post" (
     "id" TEXT NOT NULL,
     "content" TEXT NOT NULL,
-    "mediaUrl" TEXT NOT NULL,
+    "mediaUrl" TEXT,
+    "userId" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "userId" TEXT,
 
     CONSTRAINT "Post_pkey" PRIMARY KEY ("id")
 );
