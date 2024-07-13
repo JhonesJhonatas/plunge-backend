@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
 
-import { IEditUserDto, ICreateUserDto } from '@user/dto'
+import { IEditUserDto, ICreateUserDto, IDeleteUserDto } from '@user/dto'
 
 export interface IUserRepository {
   create: (params: ICreateUserDto) => Promise<User>
@@ -11,4 +11,6 @@ export interface IUserRepository {
 
   searchByName: (name: string) => Promise<User[]>
   searchByEmail: (email: string) => Promise<User[]>
+
+  delete: (params: IDeleteUserDto) => Promise<User>
 }

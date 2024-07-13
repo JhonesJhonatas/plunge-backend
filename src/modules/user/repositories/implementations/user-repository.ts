@@ -2,7 +2,7 @@ import { PrismaClient, User } from '@prisma/client'
 
 import { IUserRepository } from '@user/repositories/i-user-repository'
 
-import { ICreateUserDto, IEditUserDto } from '@user/dto'
+import { ICreateUserDto, IDeleteUserDto, IEditUserDto } from '@user/dto'
 
 const prismaClient = new PrismaClient()
 export class UserRepository implements IUserRepository {
@@ -57,6 +57,16 @@ export class UserRepository implements IUserRepository {
         email: {
           contains: email,
         },
+      },
+    })
+  }
+
+  async delete(params: IDeleteUserDto) {
+    const { id } = params
+
+    return await prismaClient.user.delete({
+      where: {
+        id,
       },
     })
   }
