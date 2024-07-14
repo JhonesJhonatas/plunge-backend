@@ -1,4 +1,4 @@
-import { IsEmail, IsOptional, IsString } from 'class-validator'
+import { IsOptional, IsString } from 'class-validator'
 
 export class SearchUserValidation {
   @IsOptional()
@@ -6,6 +6,6 @@ export class SearchUserValidation {
   name: string
 
   @IsOptional()
-  @IsEmail()
+  @IsString()
   email: string
 }

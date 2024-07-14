@@ -48,6 +48,6 @@ export class EditUserService {
       Object.assign(updateData, { password: passwordHash })
     }
 
-    return await this.userRepository.create(updateData as EditUserValidation)
+    return await this.userRepository.edit(updateData)
   }
 }

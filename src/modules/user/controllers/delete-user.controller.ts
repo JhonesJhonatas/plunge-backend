@@ -9,7 +9,7 @@ import { DeleteUserValidation } from '@user/validations'
 export class DeleteUserController {
   constructor(private readonly deleteUserService: DeleteUserService) {}
 
-  @Delete()
+  @Delete(':id')
   async handle(@Param() params: DeleteUserValidation): Promise<User> {
     return await this.deleteUserService.execute(params)
   }

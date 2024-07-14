@@ -8,6 +8,7 @@ export interface IUserRepository {
 
   findById: (id: string) => Promise<User | null>
   findByEmail: (email: string) => Promise<User | null>
+  findAll: () => Promise<User[]>
 
   searchByName: (name: string) => Promise<User[]>
   searchByEmail: (email: string) => Promise<User[]>

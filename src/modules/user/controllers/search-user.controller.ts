@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common'
+import { Controller, Get, Query } from '@nestjs/common'
 
 import { User } from '@prisma/client'
 
@@ -10,7 +10,7 @@ export class SearchUserController {
   constructor(private readonly searchUserService: SearchUserService) {}
 
   @Get()
-  async handle(@Param() params: SearchUserValidation): Promise<User[]> {
+  async handle(@Query() params: SearchUserValidation): Promise<User[]> {
     return await this.searchUserService.execute(params)
   }
 }
