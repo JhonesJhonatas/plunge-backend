@@ -29,7 +29,7 @@ export class PostRepository implements IPostRepository {
   }
 
   async findById(id: string): Promise<Post | null> {
-    return await prismaClient.post.findUnique({
+    return await prismaClient.post.findFirst({
       where: {
         id,
       },

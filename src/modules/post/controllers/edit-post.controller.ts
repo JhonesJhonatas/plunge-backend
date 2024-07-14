@@ -1,4 +1,5 @@
-import { Controller, Param, Put } from '@nestjs/common'
+import { Body, Controller, Put } from '@nestjs/common'
+
 import { Post } from '@prisma/client'
 
 import { EditPostService } from '@post/services'
@@ -9,7 +10,7 @@ export class EditPostController {
   constructor(private readonly editPostService: EditPostService) {}
 
   @Put()
-  async handle(@Param() params: EditPostValidation): Promise<Post> {
+  async handle(@Body() params: EditPostValidation): Promise<Post> {
     return await this.editPostService.execute(params)
   }
 }

@@ -29,5 +29,6 @@ import { UserRepository } from './repositories/implementations/user-repository'
     EditUserService,
     SearchUserService,
   ],
+  exports: [UserRepository],
 })
 export class UserModule {}

@@ -1,7 +1,9 @@
 import { AppError } from '@common/errors'
+import { Injectable } from '@nestjs/common'
 import { IDeletePostDTO } from '@post/dto'
 import { PostRepository } from '@post/repositories/implementations/post-repository'
 
+@Injectable()
 export class DeletePostService {
   constructor(private readonly postRepository: PostRepository) {}
 
