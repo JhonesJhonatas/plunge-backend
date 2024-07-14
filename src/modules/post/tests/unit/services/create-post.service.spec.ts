@@ -1,7 +1,8 @@
-import { AppError } from '@common/errors'
 import { InMemoryPostRepository } from '@post/repositories/implementations/in-memory-post-repository'
-import { CreatePostService } from '@post/services/create-post.service'
 import { InMemoryUserRepository } from '@user/repositories/implementations/in-memory-user-repository'
+
+import { AppError } from '@common/errors'
+import { CreatePostService } from '@post/services'
 
 let createPostService: CreatePostService
 

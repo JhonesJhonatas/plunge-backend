@@ -9,6 +9,10 @@ export class EditPostService {
   constructor(private readonly postRepository: PostRepository) {}
 
   async execute(params: IEditPostDTO) {
+    if (!params.content && !params.mediaUrl) {
+      throw new AppError('You must provide at least one field to update', 400)
+    }
+
     const post = await this.postRepository.findById(params.id)
 
     if (!post) {

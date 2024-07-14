@@ -5,7 +5,16 @@ import { IPostRepository } from '@post/repositories/i-post-repository'
 import { Post } from '@prisma/client'
 
 export class InMemoryPostRepository implements IPostRepository {
-  private posts: Post[] = []
+  private posts: Post[] = [
+    {
+      id: '5d3ac767-ca8f-42f8-8e3d-bfbfe74256a3',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      content: 'Hello, World!',
+      mediaUrl: null,
+      userId: randomUUID(),
+    },
+  ]
 
   async create(params: ICreatePostDTO): Promise<Post> {
     const post: Post = {

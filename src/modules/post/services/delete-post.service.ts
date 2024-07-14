@@ -2,7 +2,7 @@ import { AppError } from '@common/errors'
 import { IDeletePostDTO } from '@post/dto'
 import { PostRepository } from '@post/repositories/implementations/post-repository'
 
-export class DeletePostSerivce {
+export class DeletePostService {
   constructor(private readonly postRepository: PostRepository) {}
 
   async execute({ id }: IDeletePostDTO) {
