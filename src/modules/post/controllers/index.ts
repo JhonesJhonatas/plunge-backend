@@ -1,0 +1,5 @@
+export * from './create-post.controller'
+export * from './delete-post.controller'
+export * from './edit-post.controller'
+export * from './get-all-posts.controller'
+export * from './search-post.controller'
