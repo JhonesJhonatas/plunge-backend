@@ -13,6 +13,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set up Git
+        run: |
+          git config user.name "Jhones Jhonatas"
+          git config user.email "jhones.jhonatas@outlook.com.br"
+
       - name: Checkout main branch
         uses: actions/checkout@v3
         with:
