@@ -27,5 +27,5 @@ jobs:
 
       - name: Merge branch
         run: |
-          git merge origin ${{ github.event.inputs.branch }} --no-ff -m "Merge branch '${{ github.event.inputs.branch }}' into main"
+          git pull origin ${{ github.event.inputs.branch }} --no-ff -m "Merge branch '${{ github.event.inputs.branch }}' into main"
           git push origin main
