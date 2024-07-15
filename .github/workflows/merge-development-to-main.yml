@@ -13,20 +13,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       - name: Set up Git
         run: |
           git config user.name "Jhones Jhonatas"
           git config user.email "jhones.jhonatas@outlook.com.br"
 
-      - name: Checkout main branch
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.target_branch }}
+      - name: Fetch all branches
+        run: git fetch --all
 
-      - name: Checkout development branch
-        run: git checkout development
+      - name: Checkout target branch
+        run: git checkout ${{ github.event.inputs.target_branch }}
 
-      - name: Merge development into main
+      - name: Merge development into target branch
         run: |
-          git merge development
+          git merge development --no-ff -m "Merge branch 'development' into ${{ github.event.inputs.target_branch }}"
           git push origin ${{ github.event.inputs.target_branch }}
