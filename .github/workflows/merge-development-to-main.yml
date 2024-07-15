@@ -1,0 +1,30 @@
+name: Merge Development to Main
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'The branch to merge into main'
+        required: true
+        default: 'development'
+        type: string
+
+jobs:
+  merge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      - name: Set up Git
+        run: |
+          git config user.name "Jhones Jhonatas"
+          git config user.email "jhones.jhonatas@outlook.com.br"
+
+      - name: Merge branch
+        run: |
+          git checkout main
+          git pull origin main
+          git merge origin development --no-ff -m "Merge branch Development' into main"
+          git push origin main
