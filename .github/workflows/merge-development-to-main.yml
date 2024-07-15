@@ -1,33 +1,28 @@
-name: Manual Merge Development to Main
+name: Manual Merge Development
 
 on:
   workflow_dispatch:
     inputs:
-      target_branch:
-        description: 'Branch to merge into'
-        required: true
-        default: 'main'
+      message:
+        type: string
+        description: 'Mensagem de commit para a mesclagem (opcional)'
+
+env:
+  MERGE_MESSAGE: ${{ github.event.inputs.message || 'Merge development' }}
 
 jobs:
-  merge:
+  merge-development:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Set up Git
+      - name: Fetch branch 'development'
         run: |
-          git config user.name "Jhones Jhonatas"
-          git config user.email "jhones.jhonatas@outlook.com.br"
+          git fetch origin development
 
-      - name: Fetch all branches
-        run: git fetch --all
-
-      - name: Checkout target branch
-        run: git checkout ${{ github.event.inputs.target_branch }}
-
-      - name: Merge development into target branch
+      - name: Merge branch 'development' into 'main'
         run: |
-          git merge development --no-ff -m "Merge branch 'development' into ${{ github.event.inputs.target_branch }}"
-          git push origin ${{ github.event.inputs.target_branch }}
+          git checkout main
+          git merge --no-ff development
+          git push origin main -m "$MERGE_MESSAGE"
+
