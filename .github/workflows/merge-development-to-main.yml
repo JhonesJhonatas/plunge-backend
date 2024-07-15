@@ -23,8 +23,8 @@ jobs:
       - name: Merge branch 'development' into 'main'
         run: |
           git checkout development
-          git pull origin development
+          git pull origin development --allow-unrelated-histories
           git checkout main
-          git merge --no-ff development
+          git merge --no-ff development --allow-unrelated-histories
           git push origin main -m "$MERGE_MESSAGE"
 
