@@ -10,7 +10,9 @@ let signInService: SignInService
 describe('sign-in-service', () => {
   beforeEach(() => {
     const userRepository = new InMemoryUserRepository()
-    const jwtService = new JwtService({ secret: process.env.JWT_SECRET_KEY })
+    const jwtService = new JwtService({
+      secret: 'asfgshdgfjhdsfwt23423668urfghasdf243rghs',
+    })
 
     signInService = new SignInService(userRepository, jwtService)
   })
