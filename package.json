@@ -76,6 +76,7 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/$1",
+      "^@auth/(.*)$": "<rootDir>/modules/auth/$1",
       "^@common/(.*)$": "<rootDir>/modules/common/$1",
       "^@user/(.*)$": "<rootDir>/modules/user/$1",
       "^@post/(.*)$": "<rootDir>/modules/post/$1"

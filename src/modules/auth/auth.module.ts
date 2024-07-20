@@ -12,7 +12,7 @@ import { SignInService } from './services'
     JwtModule.register({
       global: true,
       secret: process.env.JWT_SECRET_KEY,
-      signOptions: { expiresIn: '360000000s' },
+      signOptions: { expiresIn: '1d' },
     }),
   ],
   controllers: [SignInController],

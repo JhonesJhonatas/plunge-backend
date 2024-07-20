@@ -35,17 +35,19 @@ export class SignInService {
       throw new AppError('Email or password incorrect', 401)
     }
 
+    const accessToken = await this.jwtService.signAsync({
+      id: user.id,
+      email,
+      password,
+    })
+
     const tokenResponse = {
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
       },
-      accessToken: await this.jwtService.signAsync({
-        id: user.id,
-        email,
-        password,
-      }),
+      accessToken,
     }
 
     return tokenResponse
