@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common'
+import { User } from '@prisma/client'
 import { ISearchUserDto } from '@user/dto'
 
 import { UserRepository } from '@user/repositories/implementations/user-repository'
@@ -7,20 +8,8 @@ import { UserRepository } from '@user/repositories/implementations/user-reposito
 export class SearchUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(params: ISearchUserDto) {
-    const { name, email } = params
-
-    if (name) {
-      return await this.userRepository.searchByName(name)
-    }
-
-    if (email) {
-      return await this.userRepository.searchByEmail(email)
-    }
-
-    const users = await this.userRepository.findAll()
-
-    const usersWithoutPassword = users.map((user) => {
+  private removePasswordFromUsers(users: User[]) {
+    return users.map((user) => {
       return {
         id: user.id,
         name: user.name,
@@ -28,7 +17,17 @@ export class SearchUserService {
         createdAt: user.createdAt,
       }
     })
+  }
 
-    return usersWithoutPassword
+  async execute(params: ISearchUserDto) {
+    const { name, email } = params
+
+    let users: User[]
+
+    if (name) users = await this.userRepository.searchByName(name)
+    if (email) users = await this.userRepository.searchByEmail(email)
+    if (!name && !email) users = await this.userRepository.findAll()
+
+    return this.removePasswordFromUsers(users)
   }
 }

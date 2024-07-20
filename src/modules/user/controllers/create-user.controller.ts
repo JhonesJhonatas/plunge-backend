@@ -1,7 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common'
 
-import { User } from '@prisma/client'
-
 import { CreateUserService } from '@user/services/create-user.service'
 import { CreateUserValidation } from '@user/validations'
 
@@ -10,7 +8,7 @@ export class CreateUserController {
   constructor(private readonly createUserService: CreateUserService) {}
 
   @Post()
-  async handle(@Body() params: CreateUserValidation): Promise<User> {
+  async handle(@Body() params: CreateUserValidation) {
     return await this.createUserService.execute(params)
   }
 }

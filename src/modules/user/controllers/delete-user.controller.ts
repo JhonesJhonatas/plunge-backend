@@ -1,6 +1,5 @@
 import { Controller, Delete, Param } from '@nestjs/common'
 
-import { User } from '@prisma/client'
 import { DeleteUserService } from '@user/services/delete-user.service'
 
 import { DeleteUserValidation } from '@user/validations'
@@ -10,7 +9,7 @@ export class DeleteUserController {
   constructor(private readonly deleteUserService: DeleteUserService) {}
 
   @Delete(':id')
-  async handle(@Param() params: DeleteUserValidation): Promise<User> {
+  async handle(@Param() params: DeleteUserValidation) {
     return await this.deleteUserService.execute(params)
   }
 }
