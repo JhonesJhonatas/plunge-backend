@@ -22,6 +22,8 @@ jobs:
 
       - name: Run tests
         run: yarn test
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
 
       - name: Install Railway
         run: npm i -g @railway/cli
@@ -29,5 +31,4 @@ jobs:
       - name: Deploy
         run: railway up --service plunge-backend
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
           JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY }}
