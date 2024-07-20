@@ -22,9 +22,16 @@ export class CreateUserService {
 
     const passwordHash = await hash(params.password, 8)
 
-    return await this.userRepository.create({
+    const { id, name, email, createdAt } = await this.userRepository.create({
       ...params,
       password: passwordHash,
     })
+
+    return {
+      id,
+      name,
+      email,
+      createdAt,
+    }
   }
 }

@@ -48,6 +48,14 @@ export class EditUserService {
       Object.assign(updateData, { password: passwordHash })
     }
 
-    return await this.userRepository.edit(updateData)
+    const { id, name, email, createdAt } =
+      await this.userRepository.edit(updateData)
+
+    return {
+      id,
+      name,
+      email,
+      createdAt,
+    }
   }
 }

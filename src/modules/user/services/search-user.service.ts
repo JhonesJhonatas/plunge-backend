@@ -18,6 +18,17 @@ export class SearchUserService {
       return await this.userRepository.searchByEmail(email)
     }
 
-    return await this.userRepository.findAll()
+    const users = await this.userRepository.findAll()
+
+    const usersWithoutPassword = users.map((user) => {
+      return {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+      }
+    })
+
+    return usersWithoutPassword
   }
 }

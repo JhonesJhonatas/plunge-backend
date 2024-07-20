@@ -8,13 +8,21 @@ import { UserRepository } from '@user/repositories/implementations/user-reposito
 export class DeleteUserService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute({ id }: IDeleteUserDto) {
-    const user = await this.userRepository.findById(id)
+  async execute(params: IDeleteUserDto) {
+    const user = await this.userRepository.findById(params.id)
 
     if (!user) {
       throw new AppError('User not found', 404)
     }
 
-    return await this.userRepository.delete(user)
+    const { id, name, email, createdAt } =
+      await this.userRepository.delete(user)
+
+    return {
+      id,
+      name,
+      email,
+      createdAt,
+    }
   }
 }

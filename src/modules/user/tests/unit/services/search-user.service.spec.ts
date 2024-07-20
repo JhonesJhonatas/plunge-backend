@@ -21,7 +21,6 @@ describe('search-user-service', () => {
       expect(user).toHaveProperty('email')
       expect(user).toHaveProperty('password')
       expect(user).toHaveProperty('createdAt')
-      expect(user).toHaveProperty('updatedAt')
     })
   })
 
@@ -35,9 +34,7 @@ describe('search-user-service', () => {
       expect(user).toHaveProperty('id')
       expect(user).toHaveProperty('name')
       expect(user).toHaveProperty('email')
-      expect(user).toHaveProperty('password')
       expect(user).toHaveProperty('createdAt')
-      expect(user).toHaveProperty('updatedAt')
     })
   })
 })

@@ -24,8 +24,6 @@ describe('delete-user-service', () => {
     expect(deletedUser.id).toEqual('42a50108-3d20-4f4e-9565-20b4945c21da')
     expect(deletedUser.name).toEqual('User In Memory')
     expect(deletedUser.email).toEqual('userinmemory@email.com')
-    expect(deletedUser).toHaveProperty('password')
     expect(deletedUser).toHaveProperty('createdAt')
-    expect(deletedUser).toHaveProperty('updatedAt')
   })
 })
