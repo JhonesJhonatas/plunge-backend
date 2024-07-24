@@ -2,7 +2,7 @@ import { Body, Controller, Post } from '@nestjs/common'
 
 import { SignInService } from '@auth/services'
 import { SignInValidation } from '@auth/validations'
-import { Public } from '@auth/constants'
+import { Public } from '@common/constants'
 
 interface IResponse {
   user: {
