@@ -13,7 +13,7 @@ async function bootstrap() {
   )
 
   app.enableCors({
-    origin: ['https://www.plunge.app.br/', 'http://localhost:5173'],
+    origin: ['https://plunge-frontend.vercel.app', 'http://localhost:5173'],
   })
 
   await app.listen(process.env.PORT || 80)
