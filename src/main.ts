@@ -11,6 +11,11 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   )
+
+  app.enableCors({
+    origin: ['https://www.plunge.app.br/', 'http://localhost:5173'],
+  })
+
   await app.listen(process.env.PORT || 80)
 }
 bootstrap()
