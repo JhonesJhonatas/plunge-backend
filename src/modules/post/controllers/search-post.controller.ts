@@ -9,7 +9,7 @@ export class SearchPostController {
   constructor(private readonly searchPostService: SearchPostService) {}
 
   @Get()
-  async handle(@Query() params: SearchPostValidation): Promise<Post[]> {
-    return await this.searchPostService.execute(params.content)
+  async handle(@Query() { content }: SearchPostValidation): Promise<Post[]> {
+    return await this.searchPostService.execute({ content })
   }
 }

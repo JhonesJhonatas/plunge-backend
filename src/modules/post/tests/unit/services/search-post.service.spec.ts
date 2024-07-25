@@ -21,8 +21,23 @@ describe('edit-post-service', () => {
     })
   })
 
+  it('should be able to search post without any param', async () => {
+    const posts = await searchAllPostsService.execute({})
+
+    posts.forEach((post) => {
+      expect(post).toHaveProperty('id')
+      expect(post).toHaveProperty('createdAt')
+      expect(post).toHaveProperty('updatedAt')
+      expect(post).toHaveProperty('userId')
+      expect(post).toHaveProperty('content')
+      expect(post).toHaveProperty('mediaUrl')
+    })
+  })
+
   it('should be able to search post by content', async () => {
-    const posts = await searchAllPostsService.execute('any_content')
+    const posts = await searchAllPostsService.execute({
+      content: 'any_content',
+    })
 
     posts.forEach((post) => {
       expect(post).toHaveProperty('id')

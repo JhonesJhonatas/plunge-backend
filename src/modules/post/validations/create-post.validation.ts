@@ -7,8 +7,4 @@ export class CreatePostValidation {
   @IsOptional()
   @IsString()
   mediaUrl?: string
-
-  @IsOptional()
-  @IsString()
-  userId: string
 }
