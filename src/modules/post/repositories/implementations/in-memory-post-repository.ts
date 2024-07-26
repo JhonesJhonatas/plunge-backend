@@ -7,6 +7,7 @@ import {
   ISearchPostDto,
   ISearchPostResponseDto,
 } from '@post/dto'
+
 import { IPostRepository } from '@post/repositories/i-post-repository'
 import { Post } from '@prisma/client'
 

@@ -48,12 +48,14 @@ export class PostRepository implements IPostRepository {
 
   async searchByContent({
     content,
+    userId,
   }: ISearchPostDto): Promise<ISearchPostResponseDto[]> {
     const posts = await prismaClient.post.findMany({
       where: {
         content: {
           contains: content,
         },
+        userId,
       },
       include: {
         User: true,

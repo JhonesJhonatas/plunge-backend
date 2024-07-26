@@ -1,5 +1,6 @@
 export interface ISearchPostDto {
   content?: string
+  userId?: string
 }
 
 export interface ISearchPostResponseDto {

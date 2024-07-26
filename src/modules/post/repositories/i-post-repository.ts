@@ -19,5 +19,6 @@ export interface IPostRepository {
 
   searchByContent({
     content,
+    userId,
   }: ISearchPostDto): Promise<ISearchPostResponseDto[]>
 }

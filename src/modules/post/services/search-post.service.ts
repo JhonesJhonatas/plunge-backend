@@ -6,7 +6,7 @@ import { PostRepository } from '@post/repositories/implementations/post-reposito
 export class SearchPostService {
   constructor(private readonly postRepository: PostRepository) {}
 
-  async execute({ content }: ISearchPostDto) {
-    return await this.postRepository.searchByContent({ content })
+  async execute({ content, userId }: ISearchPostDto) {
+    return await this.postRepository.searchByContent({ content, userId })
   }
 }

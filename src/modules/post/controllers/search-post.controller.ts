@@ -10,8 +10,8 @@ export class SearchPostController {
 
   @Get()
   async handle(
-    @Query() { content }: SearchPostValidation,
+    @Query() { content, userId }: SearchPostValidation,
   ): Promise<ISearchPostResponseDto[]> {
-    return await this.searchPostService.execute({ content })
+    return await this.searchPostService.execute({ content, userId })
   }
 }

@@ -4,4 +4,8 @@ export class SearchPostValidation {
   @IsOptional()
   @IsString()
   content?: string
+
+  @IsOptional()
+  @IsString()
+  userId?: string
 }
