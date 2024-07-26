@@ -31,6 +31,8 @@ describe('edit-post-service', () => {
       expect(post).toHaveProperty('userId')
       expect(post).toHaveProperty('content')
       expect(post).toHaveProperty('mediaUrl')
+      expect(post).toHaveProperty('ups')
+      expect(post).toHaveProperty('downs')
     })
   })
 
@@ -46,6 +48,8 @@ describe('edit-post-service', () => {
       expect(post).toHaveProperty('userId')
       expect(post).toHaveProperty('content')
       expect(post).toHaveProperty('mediaUrl')
+      expect(post).toHaveProperty('ups')
+      expect(post).toHaveProperty('downs')
     })
   })
 })

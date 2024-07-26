@@ -4,6 +4,7 @@ import {
   ICreatePostDTO,
   IDeletePostDTO,
   IEditPostDTO,
+  ISearchPostDto,
   ISearchPostResponseDto,
 } from '@post/dto'
 
@@ -45,7 +46,9 @@ export class PostRepository implements IPostRepository {
     return await prismaClient.post.findMany()
   }
 
-  async searchByContent(content: string): Promise<ISearchPostResponseDto[]> {
+  async searchByContent({
+    content,
+  }: ISearchPostDto): Promise<ISearchPostResponseDto[]> {
     const posts = await prismaClient.post.findMany({
       where: {
         content: {

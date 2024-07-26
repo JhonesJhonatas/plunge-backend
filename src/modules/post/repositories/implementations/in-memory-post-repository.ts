@@ -1,6 +1,12 @@
 import { randomUUID } from 'crypto'
 
-import { ICreatePostDTO, IDeletePostDTO, IEditPostDTO } from '@post/dto'
+import {
+  ICreatePostDTO,
+  IDeletePostDTO,
+  IEditPostDTO,
+  ISearchPostDto,
+  ISearchPostResponseDto,
+} from '@post/dto'
 import { IPostRepository } from '@post/repositories/i-post-repository'
 import { Post } from '@prisma/client'
 
@@ -10,6 +16,8 @@ export class InMemoryPostRepository implements IPostRepository {
       id: '5d3ac767-ca8f-42f8-8e3d-bfbfe74256a3',
       createdAt: new Date(),
       updatedAt: new Date(),
+      ups: 0,
+      downs: 0,
       content: 'Hello, World!',
       mediaUrl: null,
       userId: randomUUID(),
@@ -22,6 +30,8 @@ export class InMemoryPostRepository implements IPostRepository {
       createdAt: new Date(),
       updatedAt: new Date(),
       mediaUrl: null,
+      ups: 0,
+      downs: 0,
       ...params,
     }
 
@@ -67,7 +77,28 @@ export class InMemoryPostRepository implements IPostRepository {
     return this.posts
   }
 
-  async searchByContent(content: string): Promise<Post[]> {
-    return this.posts.filter((post) => post.content.includes(content))
+  async searchByContent({
+    content,
+  }: ISearchPostDto): Promise<ISearchPostResponseDto[]> {
+    const posts = this.posts.filter((post) => post.content.includes(content))
+
+    return posts.map((post) => {
+      return {
+        id: post.id,
+        content: post.content,
+        mediaUrl: post.mediaUrl,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        ups: post.ups,
+        downs: post.downs,
+        userId: post.userId,
+        author: {
+          id: post.userId,
+          name: 'John Doe',
+          email: 'email@email.com',
+          avatarUrl: 'http://avatar.com',
+        },
+      }
+    })
   }
 }

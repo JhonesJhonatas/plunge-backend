@@ -22,7 +22,12 @@ export class EditUserService {
       id: params.id,
     }
 
-    if (!params.email && !params.name && !params.password) {
+    if (
+      !params.email &&
+      !params.name &&
+      !params.password &&
+      !params.avatarUrl
+    ) {
       throw new AppError('You must provide at least one field to update', 400)
     }
 

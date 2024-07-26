@@ -7,6 +7,6 @@ export class SearchPostService {
   constructor(private readonly postRepository: PostRepository) {}
 
   async execute({ content }: ISearchPostDto) {
-    return await this.postRepository.searchByContent(content)
+    return await this.postRepository.searchByContent({ content })
   }
 }

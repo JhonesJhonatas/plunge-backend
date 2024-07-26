@@ -4,6 +4,7 @@ import {
   ICreatePostDTO,
   IDeletePostDTO,
   IEditPostDTO,
+  ISearchPostDto,
   ISearchPostResponseDto,
 } from '@post/dto'
 
@@ -16,5 +17,7 @@ export interface IPostRepository {
 
   getAll(): Promise<Post[]>
 
-  searchByContent(content: string): Promise<ISearchPostResponseDto[]>
+  searchByContent({
+    content,
+  }: ISearchPostDto): Promise<ISearchPostResponseDto[]>
 }
