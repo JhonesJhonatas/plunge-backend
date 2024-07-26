@@ -42,13 +42,17 @@ export class EditUserService {
       Object.assign(updateData, { name: params.name })
     }
 
+    if (params.avatarUrl) {
+      Object.assign(updateData, { avatarUrl: params.avatarUrl })
+    }
+
     if (params.password) {
       const passwordHash = await hash(params.password, 8)
 
       Object.assign(updateData, { password: passwordHash })
     }
 
-    const { id, name, email, createdAt } =
+    const { id, name, email, createdAt, avatarUrl } =
       await this.userRepository.edit(updateData)
 
     return {
@@ -56,6 +60,7 @@ export class EditUserService {
       name,
       email,
       createdAt,
+      avatarUrl,
     }
   }
 }

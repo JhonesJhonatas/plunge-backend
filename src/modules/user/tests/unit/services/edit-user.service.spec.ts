@@ -15,6 +15,7 @@ describe('edit-user-service', () => {
       name: 'tester',
       email: 'tester@email.com',
       password: '123456',
+      avatarUrl: null,
     })
   })
 
@@ -24,6 +25,7 @@ describe('edit-user-service', () => {
       name: 'tester',
       email: 'tester@email.com',
       password: '123456',
+      avatarUrl: null,
     }
 
     await expect(editUserService.execute(userToUpdate)).rejects.toEqual(
@@ -37,6 +39,7 @@ describe('edit-user-service', () => {
       name: null,
       email: null,
       password: null,
+      avatarUrl: null,
     }
 
     await expect(editUserService.execute(userToUpdate)).rejects.toEqual(
@@ -50,6 +53,7 @@ describe('edit-user-service', () => {
       name: null,
       email: 'tester@email.com',
       password: '123456',
+      avatarUrl: null,
     }
 
     await expect(editUserService.execute(userToEdit)).rejects.toEqual(
@@ -63,6 +67,7 @@ describe('edit-user-service', () => {
       email: 'new.email@email.com',
       name: null,
       password: null,
+      avatarUrl: null,
     }
 
     const editedUser = await editUserService.execute(userToEdit)
@@ -77,6 +82,7 @@ describe('edit-user-service', () => {
       email: null,
       name: 'New Name',
       password: null,
+      avatarUrl: null,
     }
 
     const editedUser = await editUserService.execute(userToEdit)
@@ -91,6 +97,7 @@ describe('edit-user-service', () => {
       email: null,
       name: null,
       password: '123456',
+      avatarUrl: null,
     }
 
     const editedUser = await editUserService.execute(userToEdit)
@@ -98,12 +105,27 @@ describe('edit-user-service', () => {
     expect(editedUser).toHaveProperty('id')
   })
 
-  it('should be able to edit a user with a new email, name and password', async () => {
+  it('should be able to edit a user with a new avatarUrl', async () => {
+    const userToEdit = {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      email: null,
+      name: null,
+      password: null,
+      avatarUrl: 'just-avatar',
+    }
+
+    const editedUser = await editUserService.execute(userToEdit)
+
+    expect(editedUser).toHaveProperty('id')
+  })
+
+  it('should be able to edit a user with a new email, name, password and avatarUrl', async () => {
     const userToEdit = {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: 'new.email@email.com',
       name: 'New Name',
       password: 'new Password',
+      avatarUrl: 'newAvatar',
     }
 
     const editedUser = await editUserService.execute(userToEdit)

@@ -10,6 +10,7 @@ export class InMemoryUserRepository implements IUserRepository {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: 'userinmemory@email.com',
       name: 'User In Memory',
+      avatarUrl: 'avatar',
       password: '$2b$08$6xsbr4RE9dIqTKMo6iZKOuHYx7t.abub/s9eTfQzHfeESigJNV4Tu',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -18,6 +19,7 @@ export class InMemoryUserRepository implements IUserRepository {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: 'usertotestauth@email.com',
       name: 'User to Test Auth',
+      avatarUrl: 'vatar',
       password: '$2b$08$PdpZSUHX.9TzyfTzOLjWSuxvSq2ZNH8TGBrjJgq90O7IYg29CNR2G',
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -27,6 +29,7 @@ export class InMemoryUserRepository implements IUserRepository {
   async create(params: ICreateUserDto): Promise<User> {
     const user = {
       id: randomUUID(),
+      avatarUrl: null,
       createdAt: new Date(),
       updatedAt: new Date(),
       ...params,

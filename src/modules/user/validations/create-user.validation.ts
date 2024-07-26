@@ -1,4 +1,4 @@
-import { IsEmail, IsString, MinLength } from 'class-validator'
+import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator'
 
 export class CreateUserValidation {
   @IsString()
@@ -6,6 +6,10 @@ export class CreateUserValidation {
 
   @IsEmail()
   email: string
+
+  @IsOptional()
+  @IsString()
+  avatarUrl: string
 
   @MinLength(6)
   password: string

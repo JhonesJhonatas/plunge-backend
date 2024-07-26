@@ -14,6 +14,7 @@ describe('create-user-service', () => {
       name: 'tester',
       email: 'tester@email.com',
       password: '123456',
+      avatarUrl: null,
     })
   })
 
@@ -22,6 +23,7 @@ describe('create-user-service', () => {
       name: 'tester',
       email: 'tester@email.com',
       password: '123456',
+      avatarUrl: null,
     }
 
     await expect(createUserService.execute(userToCreate)).rejects.toEqual(
@@ -34,6 +36,7 @@ describe('create-user-service', () => {
       name: 'tester01',
       email: 'tester01@email.com',
       password: '123456',
+      avatarUrl: null,
     }
 
     const createdUser = await createUserService.execute(userToCreate)

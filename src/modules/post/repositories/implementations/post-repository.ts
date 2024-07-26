@@ -1,6 +1,11 @@
 import { IPostRepository } from '@post/repositories/i-post-repository'
 
-import { ICreatePostDTO, IDeletePostDTO, IEditPostDTO } from '@post/dto'
+import {
+  ICreatePostDTO,
+  IDeletePostDTO,
+  IEditPostDTO,
+  ISearchPostResponseDto,
+} from '@post/dto'
 
 import { Post, PrismaClient } from '@prisma/client'
 
@@ -40,13 +45,31 @@ export class PostRepository implements IPostRepository {
     return await prismaClient.post.findMany()
   }
 
-  async searchByContent(content: string): Promise<Post[]> {
-    return await prismaClient.post.findMany({
+  async searchByContent(content: string): Promise<ISearchPostResponseDto[]> {
+    const posts = await prismaClient.post.findMany({
       where: {
         content: {
           contains: content,
         },
       },
+      include: {
+        User: true,
+      },
     })
+
+    return posts.map((post) => ({
+      id: post.id,
+      content: post.content,
+      mediaUrl: post.mediaUrl,
+      ups: post.ups,
+      downs: post.downs,
+      author: {
+        id: post.User.id,
+        name: post.User.name,
+        avatarUrl: post.User.avatarUrl,
+      },
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+    }))
   }
 }

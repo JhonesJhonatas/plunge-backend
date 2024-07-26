@@ -13,6 +13,10 @@ export class EditUserValidation {
   email: string
 
   @IsOptional()
+  @IsString()
+  avatarUrl: string
+
+  @IsOptional()
   @MinLength(6)
   password: string
 }

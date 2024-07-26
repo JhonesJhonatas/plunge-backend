@@ -1,6 +1,11 @@
 import { Post } from '@prisma/client'
 
-import { ICreatePostDTO, IDeletePostDTO, IEditPostDTO } from '@post/dto'
+import {
+  ICreatePostDTO,
+  IDeletePostDTO,
+  IEditPostDTO,
+  ISearchPostResponseDto,
+} from '@post/dto'
 
 export interface IPostRepository {
   create(params: ICreatePostDTO): Promise<Post>
@@ -11,5 +16,5 @@ export interface IPostRepository {
 
   getAll(): Promise<Post[]>
 
-  searchByContent(content: string): Promise<Post[]>
+  searchByContent(content: string): Promise<ISearchPostResponseDto[]>
 }
