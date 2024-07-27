@@ -2,6 +2,7 @@ import { Body, Controller, Post, Req } from '@nestjs/common'
 
 import { CreateFollowersService } from '@followers/services'
 import { CreateFollowesValidation } from '@followers/validation'
+
 import { Request } from 'express'
 
 @Controller('/followers')
@@ -15,10 +16,12 @@ export class CreateFollowersController {
     @Body() { followingId }: CreateFollowesValidation,
     @Req() request: Request,
   ) {
-    const followedById = request.user.id
+    const {
+      user: { id },
+    } = request
 
     return await this.createFollowersService.execute({
-      followedById,
+      followedById: id,
       followingId,
     })
   }

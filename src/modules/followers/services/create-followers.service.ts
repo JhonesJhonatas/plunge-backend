@@ -8,7 +8,7 @@ import { ICreateFollowersDto } from '@followers/dto'
 export class CreateFollowersService {
   constructor(private readonly followersRepository: FollowersRepository) {}
 
-  async execute(params: ICreateFollowersDto) {
-    return await this.followersRepository.create(params)
+  async execute({ followedById, followingId }: ICreateFollowersDto) {
+    return await this.followersRepository.create({ followedById, followingId })
   }
 }
