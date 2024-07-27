@@ -26,7 +26,9 @@ export class EditUserService {
       !params.email &&
       !params.name &&
       !params.password &&
-      !params.avatarUrl
+      !params.avatarUrl &&
+      !params.nickName &&
+      !params.bio
     ) {
       throw new AppError('You must provide at least one field to update', 400)
     }
@@ -41,6 +43,22 @@ export class EditUserService {
       }
 
       Object.assign(updateData, { email: params.email })
+    }
+
+    if (params.nickName) {
+      const userAlreadyExists = await this.userRepository.findByNickName(
+        params.nickName,
+      )
+
+      if (userAlreadyExists && userAlreadyExists.nickName !== user.nickName) {
+        throw new AppError('NickName already registered', 400)
+      }
+
+      Object.assign(updateData, { nickName: params.nickName })
+    }
+
+    if (params.bio) {
+      Object.assign(updateData, { bio: params.bio })
     }
 
     if (params.name) {

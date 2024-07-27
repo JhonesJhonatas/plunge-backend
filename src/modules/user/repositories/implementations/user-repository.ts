@@ -41,8 +41,29 @@ export class UserRepository implements IUserRepository {
     })
   }
 
+  async findByNickName(nickName: string): Promise<User | null> {
+    return await prismaClient.user.findUnique({
+      where: {
+        nickName,
+      },
+    })
+  }
+
   async findAll(): Promise<User[]> {
     return await prismaClient.user.findMany()
+  }
+
+  async getProfileData(nickName: string): Promise<User | null> {
+    return await prismaClient.user.findUnique({
+      where: {
+        nickName,
+      },
+      include: {
+        posts: true,
+        following: true,
+        followedBy: true,
+      },
+    })
   }
 
   async searchByName(name: string): Promise<User[]> {
@@ -60,6 +81,16 @@ export class UserRepository implements IUserRepository {
       where: {
         email: {
           contains: email,
+        },
+      },
+    })
+  }
+
+  async searchByNickName(nickName: string): Promise<User[]> {
+    return await prismaClient.user.findMany({
+      where: {
+        nickName: {
+          contains: nickName,
         },
       },
     })

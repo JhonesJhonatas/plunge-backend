@@ -8,10 +8,14 @@ export interface IUserRepository {
 
   findById: (id: string) => Promise<User | null>
   findByEmail: (email: string) => Promise<User | null>
+  findByNickName: (nickName: string) => Promise<User | null>
   findAll: () => Promise<User[]>
+
+  getProfileData: (nickName: string) => Promise<User | null>
 
   searchByName: (name: string) => Promise<User[]>
   searchByEmail: (email: string) => Promise<User[]>
+  searchByNickName: (nickName: string) => Promise<User[]>
 
   delete: (params: IDeleteUserDto) => Promise<User>
 }
