@@ -8,14 +8,34 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  avatarUrl String?
-  password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  posts     Post[]
+  id         String    @id @default(uuid())
+  name       String
+  nickName   String    @unique
+  bio        String?
+  email      String    @unique
+  avatarUrl  String?
+  password   String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+  posts      Post[]
+  followedBy Follows[] @relation("followedBy")
+  following  Follows[] @relation("following")
+}
+
+model Follows {
+  followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
+  followedById String
+  following    User   @relation("following", fields: [followingId], references: [id])
+  followingId  String
+  status       Status @default(PENDING)
+
+  @@id([followingId, followedById])
+}
+
+enum Status {
+  PENDING
+  ACCEPTED
+  DECLINED
 }
 
 model Post {

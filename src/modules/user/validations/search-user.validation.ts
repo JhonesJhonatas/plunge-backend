@@ -8,4 +8,8 @@ export class SearchUserValidation {
   @IsOptional()
   @IsString()
   email: string
+
+  @IsOptional()
+  @IsString()
+  nickName: string
 }

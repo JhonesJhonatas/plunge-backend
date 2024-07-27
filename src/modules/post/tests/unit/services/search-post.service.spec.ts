@@ -52,4 +52,21 @@ describe('edit-post-service', () => {
       expect(post).toHaveProperty('downs')
     })
   })
+
+  it('should be able to search post by userId', async () => {
+    const posts = await searchAllPostsService.execute({
+      userId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+    })
+
+    posts.forEach((post) => {
+      expect(post).toHaveProperty('id')
+      expect(post).toHaveProperty('createdAt')
+      expect(post).toHaveProperty('updatedAt')
+      expect(post).toHaveProperty('userId')
+      expect(post).toHaveProperty('content')
+      expect(post).toHaveProperty('mediaUrl')
+      expect(post).toHaveProperty('ups')
+      expect(post).toHaveProperty('downs')
+    })
+  })
 })

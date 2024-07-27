@@ -4,8 +4,15 @@ export class CreateUserValidation {
   @IsString()
   name: string
 
+  @IsString()
+  nickName: string
+
   @IsEmail()
   email: string
+
+  @IsOptional()
+  @IsString()
+  bio: string
 
   @IsOptional()
   @IsString()
