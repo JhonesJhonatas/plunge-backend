@@ -45,6 +45,7 @@ export class SignInService {
         id: user.id,
         name: user.name,
         email: user.email,
+        nickName: user.nickName,
       },
       accessToken,
     }
