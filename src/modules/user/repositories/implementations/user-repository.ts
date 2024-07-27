@@ -60,6 +60,7 @@ export class UserRepository implements IUserRepository {
       },
       include: {
         posts: true,
+        following: true,
         followedBy: true,
       },
     })

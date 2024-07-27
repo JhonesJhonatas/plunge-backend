@@ -17,12 +17,12 @@ CREATE TABLE "User" (
 );
 
 -- CreateTable
-CREATE TABLE "Follows" (
+CREATE TABLE "Followers" (
     "followedById" TEXT NOT NULL,
     "followingId" TEXT NOT NULL,
     "status" "Status" NOT NULL DEFAULT 'PENDING',
 
-    CONSTRAINT "Follows_pkey" PRIMARY KEY ("followingId","followedById")
+    CONSTRAINT "Followers_pkey" PRIMARY KEY ("followingId","followedById")
 );
 
 -- CreateTable
@@ -46,10 +46,10 @@ CREATE UNIQUE INDEX "User_nickName_key" ON "User"("nickName");
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
-ALTER TABLE "Follows" ADD CONSTRAINT "Follows_followedById_fkey" FOREIGN KEY ("followedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Followers" ADD CONSTRAINT "Followers_followedById_fkey" FOREIGN KEY ("followedById") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Follows" ADD CONSTRAINT "Follows_followingId_fkey" FOREIGN KEY ("followingId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Followers" ADD CONSTRAINT "Followers_followingId_fkey" FOREIGN KEY ("followingId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Post" ADD CONSTRAINT "Post_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
