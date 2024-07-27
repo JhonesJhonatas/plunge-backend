@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, Post, Req } from '@nestjs/common'
 
 import { CreateFollowersService } from '@followers/services'
 import { CreateFollowesValidation } from '@followers/validation'
+import { Request } from 'express'
 
 @Controller('/followers')
 export class CreateFollowersController {
@@ -10,7 +11,15 @@ export class CreateFollowersController {
   ) {}
 
   @Post()
-  async handle(@Body() params: CreateFollowesValidation) {
-    return await this.createFollowersService.execute(params)
+  async handle(
+    @Body() { followingId }: CreateFollowesValidation,
+    @Req() request: Request,
+  ) {
+    const followedById = request.user.id
+
+    return await this.createFollowersService.execute({
+      followedById,
+      followingId,
+    })
   }
 }
