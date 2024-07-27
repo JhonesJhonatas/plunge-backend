@@ -13,6 +13,7 @@ export class SearchUserService {
       return {
         id: user.id,
         name: user.name,
+        nickName: user.nickName,
         email: user.email,
         avatarUrl: user.avatarUrl,
         createdAt: user.createdAt,
@@ -21,13 +22,15 @@ export class SearchUserService {
   }
 
   async execute(params: ISearchUserDto) {
-    const { name, email } = params
+    const { name, email, nickName } = params
 
     let users: User[]
 
     if (name) users = await this.userRepository.searchByName(name)
     if (email) users = await this.userRepository.searchByEmail(email)
-    if (!name && !email) users = await this.userRepository.findAll()
+    if (nickName) users = await this.userRepository.searchByNickName(nickName)
+    if (!name && !email && !nickName)
+      users = await this.userRepository.findAll()
 
     return this.removePasswordFromUsers(users)
   }

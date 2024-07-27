@@ -9,6 +9,14 @@ export class EditUserValidation {
   name: string
 
   @IsOptional()
+  @IsString()
+  nickName: string
+
+  @IsOptional()
+  @IsString()
+  bio: string
+
+  @IsOptional()
   @IsEmail()
   email: string
 

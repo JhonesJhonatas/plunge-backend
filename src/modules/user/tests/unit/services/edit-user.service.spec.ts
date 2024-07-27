@@ -15,6 +15,17 @@ describe('edit-user-service', () => {
       name: 'tester',
       email: 'tester@email.com',
       password: '123456',
+      nickName: 'editTester',
+      bio: 'Just a tester',
+      avatarUrl: null,
+    })
+
+    await createUserService.execute({
+      name: 'tester2',
+      email: 'tester2@email.com',
+      password: '123456',
+      nickName: 'editTester2',
+      bio: 'Just a tester',
       avatarUrl: null,
     })
   })
@@ -24,6 +35,8 @@ describe('edit-user-service', () => {
       id: 'inexist-id',
       name: 'tester',
       email: 'tester@email.com',
+      nickName: 'editTester',
+      bio: 'Just a tester',
       password: '123456',
       avatarUrl: null,
     }
@@ -38,6 +51,8 @@ describe('edit-user-service', () => {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       name: null,
       email: null,
+      nickName: null,
+      bio: null,
       password: null,
       avatarUrl: null,
     }
@@ -54,10 +69,28 @@ describe('edit-user-service', () => {
       email: 'tester@email.com',
       password: '123456',
       avatarUrl: null,
+      nickName: null,
+      bio: null,
     }
 
     await expect(editUserService.execute(userToEdit)).rejects.toEqual(
       new AppError('Email already registered', 400),
+    )
+  })
+
+  it('should not be able to edit a user with an nickName that is already registered', async () => {
+    const userToEdit = {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      name: null,
+      email: null,
+      password: '123456',
+      avatarUrl: null,
+      nickName: 'editTester2',
+      bio: null,
+    }
+
+    await expect(editUserService.execute(userToEdit)).rejects.toEqual(
+      new AppError('NickName already registered', 400),
     )
   })
 
@@ -66,6 +99,8 @@ describe('edit-user-service', () => {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: 'new.email@email.com',
       name: null,
+      nickName: null,
+      bio: null,
       password: null,
       avatarUrl: null,
     }
@@ -81,6 +116,8 @@ describe('edit-user-service', () => {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: null,
       name: 'New Name',
+      nickName: null,
+      bio: null,
       password: null,
       avatarUrl: null,
     }
@@ -96,6 +133,8 @@ describe('edit-user-service', () => {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: null,
       name: null,
+      nickName: null,
+      bio: null,
       password: '123456',
       avatarUrl: null,
     }
@@ -111,6 +150,8 @@ describe('edit-user-service', () => {
       email: null,
       name: null,
       password: null,
+      nickName: null,
+      bio: null,
       avatarUrl: 'just-avatar',
     }
 
@@ -119,13 +160,47 @@ describe('edit-user-service', () => {
     expect(editedUser).toHaveProperty('id')
   })
 
-  it('should be able to edit a user with a new email, name, password and avatarUrl', async () => {
+  it('should be able to edit a user with a new biography', async () => {
+    const userToEdit = {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      email: null,
+      name: null,
+      password: null,
+      nickName: null,
+      bio: 'Biography',
+      avatarUrl: null,
+    }
+
+    const editedUser = await editUserService.execute(userToEdit)
+
+    expect(editedUser).toHaveProperty('id')
+  })
+
+  it('should be able to edit a user with a new nickName', async () => {
+    const userToEdit = {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      email: null,
+      name: null,
+      password: null,
+      nickName: 'editedNickName',
+      bio: null,
+      avatarUrl: null,
+    }
+
+    const editedUser = await editUserService.execute(userToEdit)
+
+    expect(editedUser).toHaveProperty('id')
+  })
+
+  it('should be able to edit a user with a full data', async () => {
     const userToEdit = {
       id: '42a50108-3d20-4f4e-9565-20b4945c21da',
       email: 'new.email@email.com',
       name: 'New Name',
       password: 'new Password',
       avatarUrl: 'newAvatar',
+      nickName: 'newNickName',
+      bio: 'new biography',
     }
 
     const editedUser = await editUserService.execute(userToEdit)

@@ -69,8 +69,16 @@ export class InMemoryUserRepository implements IUserRepository {
     return this.users.find((user) => user.email === email) || null
   }
 
+  async findByNickName(nickName: string): Promise<User | null> {
+    return this.users.find((user) => user.nickName === nickName) || null
+  }
+
   async findAll(): Promise<User[]> {
     return this.users
+  }
+
+  async getProfileData(nickName: string): Promise<User | null> {
+    return this.users.find((user) => user.nickName === nickName) || null
   }
 
   async searchByName(name: string): Promise<User[]> {
@@ -79,6 +87,10 @@ export class InMemoryUserRepository implements IUserRepository {
 
   async searchByEmail(email: string): Promise<User[]> {
     return this.users.filter((user) => user.email.includes(email))
+  }
+
+  async searchByNickName(nickName: string): Promise<User[]> {
+    return this.users.filter((user) => user.nickName.includes(nickName))
   }
 
   async delete(params: IDeleteUserDto): Promise<User> {

@@ -11,9 +11,12 @@ import {
   CreateUserService,
   DeleteUserService,
   EditUserService,
+  GetProfileDataService,
   SearchUserService,
 } from '@user/services'
+
 import { UserRepository } from './repositories/implementations/user-repository'
+import { GetProfileDataController } from './controllers/get-profile-data.controller'
 
 @Module({
   controllers: [
@@ -21,6 +24,7 @@ import { UserRepository } from './repositories/implementations/user-repository'
     DeleteUserController,
     EditUserController,
     SearchUserController,
+    GetProfileDataController,
   ],
   providers: [
     UserRepository,
@@ -28,6 +32,7 @@ import { UserRepository } from './repositories/implementations/user-repository'
     DeleteUserService,
     EditUserService,
     SearchUserService,
+    GetProfileDataService,
   ],
   exports: [UserRepository],
 })

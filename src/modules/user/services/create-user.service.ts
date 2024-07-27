@@ -20,6 +20,14 @@ export class CreateUserService {
       throw new AppError('Email already registered', 400)
     }
 
+    const nickNameAlreadyRegistered = await this.userRepository.findByNickName(
+      params.nickName,
+    )
+
+    if (nickNameAlreadyRegistered) {
+      throw new AppError('NickName already registered', 400)
+    }
+
     const passwordHash = await hash(params.password, 8)
 
     const { id, name, nickName, bio, email, createdAt } =

@@ -48,6 +48,22 @@ describe('search-user-service', () => {
     })
   })
 
+  it('should be able to search for a user by nickName', async () => {
+    const users = await searchUserService.execute({
+      email: null,
+      name: null,
+      nickName: 'userInMemory',
+    })
+
+    users.forEach((user) => {
+      expect(user).toHaveProperty('id')
+      expect(user).toHaveProperty('name')
+      expect(user).toHaveProperty('email')
+      expect(user).toHaveProperty('avatarUrl')
+      expect(user).toHaveProperty('createdAt')
+    })
+  })
+
   it('shoudl be able to search users without any field', async () => {
     const users = await searchUserService.execute({
       email: null,
