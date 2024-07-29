@@ -35,7 +35,7 @@
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
-    "@nestjs/testing": "^10.0.0",
+    "@nestjs/testing": "^10.3.10",
     "@rocketseat/eslint-config": "^2.2.2",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.17",
@@ -76,9 +76,11 @@
     "testEnvironment": "node",
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/$1",
+      "^@modules/(.*)$": "<rootDir>/modules/$1",
       "^@auth/(.*)$": "<rootDir>/modules/auth/$1",
       "^@common/(.*)$": "<rootDir>/modules/common/$1",
       "^@user/(.*)$": "<rootDir>/modules/user/$1",
+      "^@followers/(.*)$": "<rootDir>/modules/followers/$1",
       "^@post/(.*)$": "<rootDir>/modules/post/$1"
     }
   }
