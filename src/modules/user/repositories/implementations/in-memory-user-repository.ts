@@ -28,6 +28,17 @@ export class InMemoryUserRepository implements IUserRepository {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      email: 'userwithcorrectnickmane@email.com',
+      name: 'User to Test Auth',
+      bio: '',
+      nickName: '@correctnickname',
+      avatarUrl: 'vatar',
+      password: '$2b$08$PdpZSUHX.9TzyfTzOLjWSuxvSq2ZNH8TGBrjJgq90O7IYg29CNR2G',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ]
 
   async create(params: ICreateUserDto): Promise<User> {

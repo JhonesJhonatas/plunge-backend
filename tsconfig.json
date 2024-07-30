@@ -11,6 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"],
       "@auth/*": ["src/modules/auth/*"],
       "@common/*": ["src/modules/common/*"],
       "@followers/*": ["src/modules/followers/*"],
