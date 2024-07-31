@@ -16,8 +16,47 @@ export class GetProfileDataService {
     if (!user) throw new AppError('User Not Found', 404)
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...rest } = user
 
-    return rest
+    const acceptedFollowers = user.following.filter((follower) => {
+      return follower.status === 'ACCEPTED'
+    })
+
+    const acceptedFollowing = user.followedBy.filter((following) => {
+      return following.status === 'ACCEPTED'
+    })
+
+    const pendingFollowers = user.following.filter((follower) => {
+      return follower.status === 'PENDING'
+    })
+
+    const pendingFollowing = user.followedBy.filter((following) => {
+      return following.status === 'PENDING'
+    })
+
+    const formattedUserData = {
+      user: {
+        id: user.id,
+        name: user.name,
+        nickName: user.nickName,
+        email: user.email,
+        avatarUrl: user.avatarUrl,
+        bio: user.bio,
+        createdAt: user.createdAt,
+        updatedAt: user.updatedAt,
+      },
+      posts: user.posts,
+      follows: {
+        acceptedFollowers,
+        acceptedFollowing,
+        pendingFollowers,
+        pendingFollowing,
+        counts: {
+          followers: acceptedFollowers.length,
+          following: acceptedFollowing.length,
+        },
+      },
+    }
+
+    return formattedUserData
   }
 }
