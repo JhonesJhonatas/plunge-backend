@@ -1,7 +1,12 @@
 import { User } from '@prisma/client'
 import { randomUUID } from 'crypto'
 
-import { ICreateUserDto, IDeleteUserDto, IEditUserDto } from '@user/dto'
+import {
+  ICreateUserDto,
+  IDeleteUserDto,
+  IEditUserDto,
+  IGetProfileDataResponseDto,
+} from '@user/dto'
 import { IUserRepository } from '@user/repositories/i-user-repository'
 
 export class InMemoryUserRepository implements IUserRepository {
@@ -88,8 +93,19 @@ export class InMemoryUserRepository implements IUserRepository {
     return this.users
   }
 
-  async getProfileData(nickName: string): Promise<User | null> {
-    return this.users.find((user) => user.nickName === nickName) || null
+  async getProfileData(nickName: string): Promise<IGetProfileDataResponseDto> {
+    const user = this.users.find((user) => user.nickName === nickName)
+
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    return {
+      ...user,
+      posts: [],
+      following: [],
+      followedBy: [],
+    }
   }
 
   async searchByName(name: string): Promise<User[]> {

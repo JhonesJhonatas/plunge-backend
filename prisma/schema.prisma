@@ -23,9 +23,9 @@ model User {
 }
 
 model Followers {
-  followedBy   User   @relation("followedBy", fields: [followedById], references: [id])
+  followedBy   User   @relation("followedBy", fields: [followedById], references: [id], onDelete: Cascade)
   followedById String
-  following    User   @relation("following", fields: [followingId], references: [id])
+  following    User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId  String
   status       Status @default(PENDING)
 
@@ -47,5 +47,5 @@ model Post {
   downs     Int      @default(0)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  User      User     @relation(fields: [userId], references: [id])
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

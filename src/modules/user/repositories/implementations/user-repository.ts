@@ -2,7 +2,12 @@ import { PrismaClient, User } from '@prisma/client'
 
 import { IUserRepository } from '@user/repositories/i-user-repository'
 
-import { ICreateUserDto, IDeleteUserDto, IEditUserDto } from '@user/dto'
+import {
+  ICreateUserDto,
+  IDeleteUserDto,
+  IEditUserDto,
+  IGetProfileDataResponseDto,
+} from '@user/dto'
 
 const prismaClient = new PrismaClient()
 export class UserRepository implements IUserRepository {
@@ -53,15 +58,39 @@ export class UserRepository implements IUserRepository {
     return await prismaClient.user.findMany()
   }
 
-  async getProfileData(nickName: string): Promise<User | null> {
+  async getProfileData(nickName: string): Promise<IGetProfileDataResponseDto> {
     return await prismaClient.user.findUnique({
       where: {
         nickName,
       },
       include: {
         posts: true,
-        following: true,
-        followedBy: true,
+        following: {
+          select: {
+            status: true,
+            followedBy: {
+              select: {
+                id: true,
+                name: true,
+                avatarUrl: true,
+                nickName: true,
+              },
+            },
+          },
+        },
+        followedBy: {
+          select: {
+            status: true,
+            following: {
+              select: {
+                id: true,
+                name: true,
+                avatarUrl: true,
+                nickName: true,
+              },
+            },
+          },
+        },
       },
     })
   }
