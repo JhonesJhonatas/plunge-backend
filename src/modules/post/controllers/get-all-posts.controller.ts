@@ -1,13 +1,14 @@
 import { Controller, Get } from '@nestjs/common'
 import { GetAllPostsService } from '@post/services'
-import { Post } from '@prisma/client'
+
+import { IPostFormatDto } from '../dto'
 
 @Controller('/post/get-all')
 export class GetAllPostsController {
   constructor(private readonly getAllPostsService: GetAllPostsService) {}
 
   @Get()
-  async handle(): Promise<Post[]> {
+  async handle(): Promise<IPostFormatDto[]> {
     return await this.getAllPostsService.execute()
   }
 }

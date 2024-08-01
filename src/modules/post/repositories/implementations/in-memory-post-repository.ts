@@ -83,23 +83,23 @@ export class InMemoryPostRepository implements IPostRepository {
   }: ISearchPostDto): Promise<ISearchPostResponseDto[]> {
     const posts = this.posts.filter((post) => post.content.includes(content))
 
-    return posts.map((post) => {
+    const formattedPosts = posts.map((post) => {
       return {
-        id: post.id,
-        content: post.content,
-        mediaUrl: post.mediaUrl,
-        createdAt: post.createdAt,
-        updatedAt: post.updatedAt,
-        ups: post.ups,
-        downs: post.downs,
-        userId: post.userId,
-        author: {
-          id: post.userId,
-          name: 'John Doe',
-          email: 'email@email.com',
-          avatarUrl: 'http://avatar.com',
+        ...post,
+        User: {
+          id: 'asduahsda',
+          name: 'User',
+          nickName: '@user',
+          bio: null,
+          email: 'user@email.com',
+          avatarUrl: 'sdasd.hmlt',
+          password: '123123',
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
       }
     })
+
+    return formattedPosts
   }
 }
