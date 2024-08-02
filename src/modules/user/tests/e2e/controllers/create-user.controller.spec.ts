@@ -184,9 +184,9 @@ describe('create-user-controller', () => {
   it('should be able to create a user with success', () => {
     const userToCreate = {
       name: 'Success Tester',
-      nickName: '@successtester',
+      nickName: '@createuserwithsuccess',
       bio: 'Success Tester Bio',
-      email: 'successtester@email.com',
+      email: 'createuserwithsuccess@email.com',
       password: '123456',
       avatarUrl: null,
     }

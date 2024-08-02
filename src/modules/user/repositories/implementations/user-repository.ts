@@ -65,32 +65,8 @@ export class UserRepository implements IUserRepository {
       },
       include: {
         posts: true,
-        following: {
-          select: {
-            status: true,
-            followedBy: {
-              select: {
-                id: true,
-                name: true,
-                avatarUrl: true,
-                nickName: true,
-              },
-            },
-          },
-        },
-        followedBy: {
-          select: {
-            status: true,
-            following: {
-              select: {
-                id: true,
-                name: true,
-                avatarUrl: true,
-                nickName: true,
-              },
-            },
-          },
-        },
+        followers: true,
+        following: true,
       },
     })
   }

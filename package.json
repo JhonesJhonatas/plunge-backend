@@ -80,7 +80,7 @@
       "^@auth/(.*)$": "<rootDir>/modules/auth/$1",
       "^@common/(.*)$": "<rootDir>/modules/common/$1",
       "^@user/(.*)$": "<rootDir>/modules/user/$1",
-      "^@followers/(.*)$": "<rootDir>/modules/followers/$1",
+      "^@follower/(.*)$": "<rootDir>/modules/follower/$1",
       "^@post/(.*)$": "<rootDir>/modules/post/$1"
     }
   }

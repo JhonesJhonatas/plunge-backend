@@ -10,22 +10,11 @@ export class SearchPostService {
     const posts = await this.postRepository.searchByContent({ content, userId })
 
     const formattedPosts: IPostFormatDto[] = posts.map(
-      ({
-        User: user,
-        id,
-        content,
-        mediaUrl,
-        ups,
-        downs,
-        createdAt,
-        updatedAt,
-      }) => {
+      ({ User: user, id, content, mediaUrl, createdAt, updatedAt }) => {
         return {
           id,
           content,
           mediaUrl,
-          ups,
-          downs,
           createdAt,
           updatedAt,
           author: {

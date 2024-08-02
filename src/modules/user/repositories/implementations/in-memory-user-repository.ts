@@ -104,7 +104,7 @@ export class InMemoryUserRepository implements IUserRepository {
       ...user,
       posts: [],
       following: [],
-      followedBy: [],
+      followers: [],
     }
   }
 

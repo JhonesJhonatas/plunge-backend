@@ -9,8 +9,6 @@ export interface IPostFormatDto {
   id: string
   content: string
   mediaUrl?: string
-  ups: number
-  downs: number
   author: Author
   createdAt: Date
   updatedAt: Date

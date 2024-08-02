@@ -25,12 +25,14 @@ model User {
 }
 
 model Follower {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   followerId  String
   followingId String
-  follower    User   @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
-  following   User   @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
-  status      Status @default(PENDING)
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@unique([followerId, followingId])
 }
