@@ -16,7 +16,9 @@ export interface IUserRepository {
   findByNickName: (nickName: string) => Promise<User | null>
   findAll: () => Promise<User[]>
 
-  getProfileData: (nickName: string) => Promise<IGetProfileDataResponseDto>
+  getProfileData: (
+    nickName: string,
+  ) => Promise<IGetProfileDataResponseDto | null>
 
   searchByName: (name: string) => Promise<User[]>
   searchByEmail: (email: string) => Promise<User[]>

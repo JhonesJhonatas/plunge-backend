@@ -5,22 +5,22 @@ import * as jwt from 'jsonwebtoken'
 
 import { AppModule } from '@/app.module'
 
-import { InMemoryFollowerRepository } from '@follower/repositories/implementations/in-memory-follower-repository'
-import { FollowerRepository } from '../../repositories/implementations/follower-repository'
+import { InMemoryUserRepository } from '@/modules/user/repositories/implementations/in-memory-user-repository'
+import { UserRepository } from '@/modules/user/repositories/implementations/user-repository'
 
-describe('edit-follower-controller', () => {
+describe('delete-user-controller', () => {
   let app: INestApplication
-  let inMemoryFollowerRepository: InMemoryFollowerRepository
+  let inMemoryUserRepository: InMemoryUserRepository
   let token: string
 
   beforeAll(async () => {
-    inMemoryFollowerRepository = new InMemoryFollowerRepository()
+    inMemoryUserRepository = new InMemoryUserRepository()
 
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     })
-      .overrideProvider(FollowerRepository)
-      .useValue(inMemoryFollowerRepository)
+      .overrideProvider(UserRepository)
+      .useValue(inMemoryUserRepository)
       .compile()
 
     app = moduleFixture.createNestApplication()
@@ -40,15 +40,10 @@ describe('edit-follower-controller', () => {
     )
   })
 
-  it('should be able to edit a follower with success', () => {
-    const followerToEdit = {
-      id: '42a41049-3d20-4f4e-9565-20b4945c21da',
-      status: 'DECLINED',
-    }
-
+  it('should be able to delete a user with success', () => {
     return request(app.getHttpServer())
-      .put('/follower')
-      .send(followerToEdit)
+      .delete('/user/42a091901-3d20-4f4e-9565-20b4945c21da')
+      .send()
       .set('Authorization', `Bearer ${token}`)
       .set(
         'user',
@@ -57,8 +52,8 @@ describe('edit-follower-controller', () => {
       .expect(200)
       .expect((response) => {
         expect(response.body).toHaveProperty('id')
-        expect(response.body).toHaveProperty('followerId')
-        expect(response.body).toHaveProperty('followingId')
+        expect(response.body).toHaveProperty('name')
+        expect(response.body).toHaveProperty('email')
         expect(response.body).toHaveProperty('createdAt')
       })
   })

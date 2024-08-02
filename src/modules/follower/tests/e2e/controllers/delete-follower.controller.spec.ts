@@ -6,7 +6,7 @@ import * as jwt from 'jsonwebtoken'
 import { AppModule } from '@/app.module'
 
 import { InMemoryFollowerRepository } from '@follower/repositories/implementations/in-memory-follower-repository'
-import { FollowerRepository } from '../../repositories/implementations/follower-repository'
+import { FollowerRepository } from '@follower/repositories/implementations/follower-repository'
 
 describe('delete-follower-controller', () => {
   let app: INestApplication

@@ -58,7 +58,9 @@ export class UserRepository implements IUserRepository {
     return await prismaClient.user.findMany()
   }
 
-  async getProfileData(nickName: string): Promise<IGetProfileDataResponseDto> {
+  async getProfileData(
+    nickName: string,
+  ): Promise<IGetProfileDataResponseDto | null> {
     return await prismaClient.user.findUnique({
       where: {
         nickName,

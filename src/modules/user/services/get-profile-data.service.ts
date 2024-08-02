@@ -13,7 +13,9 @@ export class GetProfileDataService {
   async execute(params: GetProfileDataValidation) {
     const user = await this.userRepository.getProfileData(params.nickName)
 
-    if (!user) throw new AppError('User Not Found', 404)
+    if (!user) {
+      throw new AppError('User not found', 404)
+    }
 
     const acceptedFollowing = user.following.filter((follower) => {
       return follower.status === 'ACCEPTED'
