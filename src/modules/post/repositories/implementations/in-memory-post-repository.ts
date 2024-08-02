@@ -4,11 +4,13 @@ import {
   ICreatePostDTO,
   IDeletePostDTO,
   IEditPostDTO,
+  IGetAllPostsResposeDto,
   ISearchPostDto,
   ISearchPostResponseDto,
 } from '@post/dto'
 
 import { IPostRepository } from '@post/repositories/i-post-repository'
+
 import { Post } from '@prisma/client'
 
 export class InMemoryPostRepository implements IPostRepository {
@@ -74,8 +76,23 @@ export class InMemoryPostRepository implements IPostRepository {
     return this.posts.find((post) => post.id === id) || null
   }
 
-  async getAll(): Promise<Post[]> {
-    return this.posts
+  async getAll(): Promise<IGetAllPostsResposeDto[]> {
+    return this.posts.map((post) => {
+      return {
+        ...post,
+        User: {
+          id: 'asduahsda',
+          name: 'User',
+          nickName: '@user',
+          bio: null,
+          email: 'user@email.com',
+          avatarUrl: 'sdasd.hmlt',
+          password: '123123',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      }
+    })
   }
 
   async searchByContent({
