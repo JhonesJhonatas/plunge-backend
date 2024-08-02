@@ -20,6 +20,14 @@ export class InMemoryFollowerRepository implements IFollowerRepository {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      id: '42a41049-3d20-4f4e-9565-20b4945c21da',
+      status: 'ACCEPTED',
+      followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ]
 
   async create({

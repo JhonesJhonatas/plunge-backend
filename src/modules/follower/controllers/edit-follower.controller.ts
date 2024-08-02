@@ -3,7 +3,7 @@ import { Body, Controller, Put } from '@nestjs/common'
 import { EditFollowerService } from '@follower/services'
 import { EditFollowerValidation } from '@follower/validation'
 
-@Controller('/followers')
+@Controller('/follower')
 export class EditFollowerController {
   constructor(private readonly editFollowerService: EditFollowerService) {}
 
