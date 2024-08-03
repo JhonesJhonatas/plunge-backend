@@ -116,8 +116,42 @@ export class InMemoryUserRepository implements IUserRepository {
     return {
       ...user,
       posts: [],
-      following: [],
-      followers: [],
+      following: [
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'ACCEPTED',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'PENDING',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      followers: [
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'ACCEPTED',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'PENDING',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
     }
   }
 

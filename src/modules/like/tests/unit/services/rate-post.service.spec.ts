@@ -76,11 +76,23 @@ describe('rate-post-service', () => {
     ).rejects.toEqual(new AppError('Post not found', 404))
   })
 
-  it('should be able to rate a post', async () => {
+  it('should be able to like a post', async () => {
     const ratedPost = await ratePostService.execute({
       postId: post.id,
       userId: user.id,
       like: true,
+    })
+
+    expect(ratedPost).toHaveProperty('id')
+    expect(ratedPost.postId).toBe(post.id)
+    expect(ratedPost.userId).toBe(user.id)
+  })
+
+  it('should be able to unlike a post', async () => {
+    const ratedPost = await ratePostService.execute({
+      postId: post.id,
+      userId: user.id,
+      like: false,
     })
 
     expect(ratedPost).toHaveProperty('id')
