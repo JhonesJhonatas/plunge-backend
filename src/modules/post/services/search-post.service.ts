@@ -6,11 +6,19 @@ import { PostRepository } from '@post/repositories/implementations/post-reposito
 export class SearchPostService {
   constructor(private readonly postRepository: PostRepository) {}
 
-  async execute({ content, userId }: ISearchPostDto) {
+  async execute({ content, userId, authorOfSearchId }: ISearchPostDto) {
     const posts = await this.postRepository.searchByContent({ content, userId })
 
     const formattedPosts: IPostFormatDto[] = posts.map(
-      ({ User: user, id, content, mediaUrl, createdAt, updatedAt }) => {
+      ({
+        User: user,
+        Like: likes,
+        id,
+        content,
+        mediaUrl,
+        createdAt,
+        updatedAt,
+      }) => {
         return {
           id,
           content,
@@ -23,6 +31,23 @@ export class SearchPostService {
             avatarUrl: user.avatarUrl,
             nickName: user.nickName,
           },
+          likesCount: likes.length,
+          userCanLike: user.id !== authorOfSearchId,
+          userAleradyLiked: likes.some(
+            (like) => like.userId === authorOfSearchId,
+          ),
+          likes: likes.map((like) => {
+            return {
+              id: like.id,
+              createdAt: like.createdAt,
+              user: {
+                id: like.user.id,
+                name: like.user.name,
+                nickName: like.user.nickName,
+                avatarUrl: like.user.avatarUrl,
+              },
+            }
+          }),
         }
       },
     )

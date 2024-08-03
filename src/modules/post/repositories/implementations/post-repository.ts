@@ -47,6 +47,18 @@ export class PostRepository implements IPostRepository {
     return await prismaClient.post.findMany({
       include: {
         User: true,
+        Like: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                nickName: true,
+                avatarUrl: true,
+              },
+            },
+          },
+        },
       },
     })
   }
@@ -64,6 +76,18 @@ export class PostRepository implements IPostRepository {
       },
       include: {
         User: true,
+        Like: {
+          include: {
+            user: {
+              select: {
+                id: true,
+                name: true,
+                nickName: true,
+                avatarUrl: true,
+              },
+            },
+          },
+        },
       },
     })
   }
