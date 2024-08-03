@@ -26,5 +26,6 @@ import {
     DeleteFollowerService,
     EditFollowerService,
   ],
+  exports: [FollowerRepository],
 })
 export class FollowerModule {}

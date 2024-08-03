@@ -71,6 +71,9 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "Follower_followerId_followingId_key" ON "Follower"("followerId", "followingId");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Like_userId_postId_key" ON "Like"("userId", "postId");
+
 -- AddForeignKey
 ALTER TABLE "Follower" ADD CONSTRAINT "Follower_followerId_fkey" FOREIGN KEY ("followerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
