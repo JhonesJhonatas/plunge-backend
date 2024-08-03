@@ -37,5 +37,6 @@ import { UserModule } from '@user/user.module'
     GetAllPostsService,
     SearchPostService,
   ],
+  exports: [PostRepository],
 })
 export class PostModule {}

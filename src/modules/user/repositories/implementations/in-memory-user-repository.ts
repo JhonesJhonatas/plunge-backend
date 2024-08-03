@@ -44,6 +44,17 @@ export class InMemoryUserRepository implements IUserRepository {
       createdAt: new Date(),
       updatedAt: new Date(),
     },
+    {
+      id: '42a091901-3d20-4f4e-9565-20b4945c21da',
+      email: 'usetodelete@email.com',
+      name: 'User to Test Auth',
+      bio: 'usetodelete',
+      nickName: '@usetodelete',
+      avatarUrl: 'usetodelete',
+      password: '$2b$08$PdpZSUHX.9TzyfTzOLjWSuxvSq2ZNH8TGBrjJgq90O7IYg29CNR2G',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
   ]
 
   async create(params: ICreateUserDto): Promise<User> {
@@ -93,18 +104,54 @@ export class InMemoryUserRepository implements IUserRepository {
     return this.users
   }
 
-  async getProfileData(nickName: string): Promise<IGetProfileDataResponseDto> {
+  async getProfileData(
+    nickName: string,
+  ): Promise<IGetProfileDataResponseDto | null> {
     const user = this.users.find((user) => user.nickName === nickName)
 
     if (!user) {
-      throw new Error('User not found')
+      return null
     }
 
     return {
       ...user,
       posts: [],
-      following: [],
-      followedBy: [],
+      following: [
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'ACCEPTED',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'PENDING',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      followers: [
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'ACCEPTED',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          status: 'PENDING',
+          followerId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
     }
   }
 

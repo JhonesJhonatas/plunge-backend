@@ -58,39 +58,17 @@ export class UserRepository implements IUserRepository {
     return await prismaClient.user.findMany()
   }
 
-  async getProfileData(nickName: string): Promise<IGetProfileDataResponseDto> {
+  async getProfileData(
+    nickName: string,
+  ): Promise<IGetProfileDataResponseDto | null> {
     return await prismaClient.user.findUnique({
       where: {
         nickName,
       },
       include: {
         posts: true,
-        following: {
-          select: {
-            status: true,
-            followedBy: {
-              select: {
-                id: true,
-                name: true,
-                avatarUrl: true,
-                nickName: true,
-              },
-            },
-          },
-        },
-        followedBy: {
-          select: {
-            status: true,
-            following: {
-              select: {
-                id: true,
-                name: true,
-                avatarUrl: true,
-                nickName: true,
-              },
-            },
-          },
-        },
+        followers: true,
+        following: true,
       },
     })
   }

@@ -30,7 +30,5 @@ describe('delete-post-service', () => {
     expect(deletedPost).toHaveProperty('mediaUrl')
     expect(deletedPost).toHaveProperty('createdAt')
     expect(deletedPost).toHaveProperty('updatedAt')
-    expect(deletedPost).toHaveProperty('ups')
-    expect(deletedPost).toHaveProperty('downs')
   })
 })

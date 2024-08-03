@@ -8,28 +8,33 @@ datasource db {
 }
 
 model User {
-  id         String      @id @default(uuid())
-  name       String
-  nickName   String      @unique
-  bio        String?
-  email      String      @unique
-  avatarUrl  String?
-  password   String
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  posts      Post[]
-  followedBy Followers[] @relation("followedBy")
-  following  Followers[] @relation("following")
+  id        String     @id @default(uuid())
+  name      String
+  nickName  String     @unique
+  bio       String?
+  email     String     @unique
+  avatarUrl String?
+  password  String
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  posts     Post[]
+  Like      Like[]
+  followers Follower[] @relation("UserFollowers")
+  following Follower[] @relation("UserFollowing")
+  Comment   Comment[]
 }
 
-model Followers {
-  followedBy   User   @relation("followedBy", fields: [followedById], references: [id], onDelete: Cascade)
-  followedById String
-  following    User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
-  followingId  String
-  status       Status @default(PENDING)
+model Follower {
+  id          String   @id @default(uuid())
+  followerId  String
+  followingId String
+  follower    User     @relation("UserFollowers", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("UserFollowing", fields: [followingId], references: [id], onDelete: Cascade)
+  status      Status   @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
-  @@id([followingId, followedById])
+  @@unique([followerId, followingId])
 }
 
 enum Status {
@@ -39,13 +44,35 @@ enum Status {
 }
 
 model Post {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   content   String
   mediaUrl  String?
   userId    String
-  ups       Int      @default(0)
-  downs     Int      @default(0)
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Like      Like[]
+  Comment   Comment[]
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  content   String
+  userId    String
+  postId    String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model Like {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
 }

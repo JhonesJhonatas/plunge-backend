@@ -33,12 +33,11 @@ describe('create-post-service', () => {
     const createdPost = await createPostService.execute(postToCreate)
 
     expect(createdPost).toHaveProperty('id')
+    expect(createdPost).toHaveProperty('content')
+    expect(createdPost).toHaveProperty('mediaUrl')
+    expect(createdPost).toHaveProperty('userId')
     expect(createdPost).toHaveProperty('createdAt')
     expect(createdPost).toHaveProperty('updatedAt')
-    expect(createdPost).toHaveProperty('userId')
-    expect(createdPost).toHaveProperty('content')
-    expect(createdPost).toHaveProperty('ups')
-    expect(createdPost).toHaveProperty('downs')
 
     expect(createdPost.userId).toBe(postToCreate.userId)
     expect(createdPost.content).toBe(postToCreate.content)
@@ -58,8 +57,6 @@ describe('create-post-service', () => {
     expect(createdPost).toHaveProperty('updatedAt')
     expect(createdPost).toHaveProperty('userId')
     expect(createdPost).toHaveProperty('content')
-    expect(createdPost).toHaveProperty('ups')
-    expect(createdPost).toHaveProperty('downs')
 
     expect(createdPost.userId).toBe(postToCreate.userId)
     expect(createdPost.content).toBe(postToCreate.content)
