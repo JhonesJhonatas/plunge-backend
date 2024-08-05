@@ -13,13 +13,17 @@ describe('search-user-service', () => {
 
   it('should not be able to get profile if nickName dosent exists', async () => {
     await expect(
-      getProfileDataService.execute({ nickName: 'unexist-nickname' }),
+      getProfileDataService.execute({
+        nickName: 'unexist-nickname',
+        userId: '123',
+      }),
     ).rejects.toEqual(new AppError('User not found', 404))
   })
 
   it('should be able to get profile data by nickName', async () => {
     const user = await getProfileDataService.execute({
       nickName: 'userToTest',
+      userId: '123',
     })
 
     expect(user).toHaveProperty('user')
