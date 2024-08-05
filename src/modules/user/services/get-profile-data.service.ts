@@ -7,11 +7,15 @@ import { UserRepository } from '@user/repositories/implementations/user-reposito
 import { GetProfileDataValidation } from '@user/validations'
 import { IPostFormatDto } from '@/modules/post/dto'
 
+interface GetProfileDataServiceProps extends GetProfileDataValidation {
+  userId: string
+}
+
 @Injectable()
 export class GetProfileDataService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(params: GetProfileDataValidation) {
+  async execute(params: GetProfileDataServiceProps) {
     const user = await this.userRepository.getProfileData(params.nickName)
 
     if (!user) {
@@ -49,8 +53,8 @@ export class GetProfileDataService {
             nickName: user.nickName,
           },
           likesCount: likes.length,
-          userCanLike: false,
-          userAleradyLiked: false,
+          userCanLike: user.id !== params.userId,
+          userAleradyLiked: likes.some((like) => like.userId === params.userId),
           likes: likes.map((like) => {
             return {
               id: like.id,
