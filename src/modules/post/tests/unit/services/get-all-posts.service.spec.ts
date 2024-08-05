@@ -22,7 +22,7 @@ describe('get-all-posts-service', () => {
   })
 
   it('should be able to get all posts', async () => {
-    const posts = await getAllPostsService.execute()
+    const posts = await getAllPostsService.execute({ userId: '123123' })
 
     posts.forEach((post) => {
       expect(post).toHaveProperty('id')

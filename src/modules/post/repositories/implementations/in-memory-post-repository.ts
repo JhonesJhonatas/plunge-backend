@@ -87,6 +87,7 @@ export class InMemoryPostRepository implements IPostRepository {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        Like: [],
       }
     })
   }
@@ -110,6 +111,7 @@ export class InMemoryPostRepository implements IPostRepository {
           createdAt: new Date(),
           updatedAt: new Date(),
         },
+        Like: [],
       }
     })
 

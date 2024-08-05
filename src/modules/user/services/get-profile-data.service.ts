@@ -5,12 +5,17 @@ import { AppError } from '@common/errors'
 import { UserRepository } from '@user/repositories/implementations/user-repository'
 
 import { GetProfileDataValidation } from '@user/validations'
+import { IPostFormatDto } from '@/modules/post/dto'
+
+interface GetProfileDataServiceProps extends GetProfileDataValidation {
+  userId: string
+}
 
 @Injectable()
 export class GetProfileDataService {
   constructor(private readonly userRepository: UserRepository) {}
 
-  async execute(params: GetProfileDataValidation) {
+  async execute(params: GetProfileDataServiceProps) {
     const user = await this.userRepository.getProfileData(params.nickName)
 
     if (!user) {
@@ -33,6 +38,39 @@ export class GetProfileDataService {
       return following.status === 'PENDING'
     })
 
+    const formattedPosts: IPostFormatDto[] = user.posts.map(
+      ({ Like: likes, id, content, mediaUrl, createdAt, updatedAt }) => {
+        return {
+          id,
+          content,
+          mediaUrl,
+          createdAt,
+          updatedAt,
+          author: {
+            id: user.id,
+            name: user.name,
+            avatarUrl: user.avatarUrl,
+            nickName: user.nickName,
+          },
+          likesCount: likes.length,
+          userCanLike: user.id !== params.userId,
+          userAleradyLiked: likes.some((like) => like.userId === params.userId),
+          likes: likes.map((like) => {
+            return {
+              id: like.id,
+              createdAt: like.createdAt,
+              user: {
+                id: like.user.id,
+                name: like.user.name,
+                nickName: like.user.nickName,
+                avatarUrl: like.user.avatarUrl,
+              },
+            }
+          }),
+        }
+      },
+    )
+
     const formattedUserData = {
       user: {
         id: user.id,
@@ -44,7 +82,7 @@ export class GetProfileDataService {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
       },
-      posts: user.posts,
+      posts: formattedPosts,
       follows: {
         acceptedFollowers,
         acceptedFollowing,
