@@ -13,12 +13,30 @@ type Like = {
   }
 }
 
+interface FollowerType extends Follower {
+  following: {
+    id: string
+    name: string
+    nickName: string
+    avatarUrl: string
+  }
+}
+
+interface FollowingType extends Follower {
+  follower: {
+    id: string
+    name: string
+    nickName: string
+    avatarUrl: string
+  }
+}
+
 interface PostSchema extends Post {
   Like: Like[]
 }
 
 export interface IGetProfileDataResponseDto extends User {
   posts: PostSchema[]
-  followers: Follower[]
-  following: Follower[]
+  followers: FollowerType[]
+  following: FollowingType[]
 }

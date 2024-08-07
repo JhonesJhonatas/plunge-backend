@@ -124,6 +124,12 @@ export class InMemoryUserRepository implements IUserRepository {
           followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
           createdAt: new Date(),
           updatedAt: new Date(),
+          follower: {
+            id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+            name: 'User In Memory',
+            nickName: 'userInMemory',
+            avatarUrl: 'avatar',
+          },
         },
         {
           id: '42a50108-3d20-4f4e-9565-20b4945c21da',
@@ -132,6 +138,12 @@ export class InMemoryUserRepository implements IUserRepository {
           followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
           createdAt: new Date(),
           updatedAt: new Date(),
+          follower: {
+            id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+            name: 'User In Memory',
+            nickName: 'userInMemory',
+            avatarUrl: 'avatar',
+          },
         },
       ],
       followers: [
@@ -142,6 +154,12 @@ export class InMemoryUserRepository implements IUserRepository {
           followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
           createdAt: new Date(),
           updatedAt: new Date(),
+          following: {
+            id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+            name: 'User In Memory',
+            nickName: 'userInMemory',
+            avatarUrl: 'avatar',
+          },
         },
         {
           id: '42a50108-3d20-4f4e-9565-20b4945c21da',
@@ -150,6 +168,12 @@ export class InMemoryUserRepository implements IUserRepository {
           followingId: '42a50108-3d20-4f4e-9565-20b4945c21da',
           createdAt: new Date(),
           updatedAt: new Date(),
+          following: {
+            id: '42a50108-3d20-4f4e-9565-20b4945c21da',
+            name: 'User In Memory',
+            nickName: 'userInMemory',
+            avatarUrl: 'avatar',
+          },
         },
       ],
     }

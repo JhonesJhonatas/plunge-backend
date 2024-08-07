@@ -84,10 +84,42 @@ export class GetProfileDataService {
       },
       posts: formattedPosts,
       follows: {
-        acceptedFollowers,
-        acceptedFollowing,
-        pendingFollowers,
-        pendingFollowing,
+        acceptedFollowers: acceptedFollowers.map((follower) => {
+          const { following: user, id, createdAt } = follower
+
+          return {
+            id,
+            createdAt,
+            user,
+          }
+        }),
+        acceptedFollowing: acceptedFollowing.map((following) => {
+          const { follower: user, id, createdAt } = following
+
+          return {
+            id,
+            createdAt,
+            user,
+          }
+        }),
+        pendingFollowers: pendingFollowers.map((follower) => {
+          const { following: user, id, createdAt } = follower
+
+          return {
+            id,
+            createdAt,
+            user,
+          }
+        }),
+        pendingFollowing: pendingFollowing.map((following) => {
+          const { follower: user, id, createdAt } = following
+
+          return {
+            id,
+            createdAt,
+            user,
+          }
+        }),
         counts: {
           followers: acceptedFollowers.length,
           following: acceptedFollowing.length,
